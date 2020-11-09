@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Lost and Found</string>
+    <string name="cari_barang">Cari barang</string>
+    <string name="kategori">Kategori</string>
+    <string name="location_pin_button">location pin button</string>
+    <string name="filter_button">filter button</string>
+    <string name="lihat_semua">Lihat semua</string>
+    <string name="terbaru">Terbaru</string>
 </resources>
