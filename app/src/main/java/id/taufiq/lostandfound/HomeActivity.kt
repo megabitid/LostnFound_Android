@@ -2,6 +2,8 @@ package id.taufiq.lostandfound
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
+import id.taufiq.lostandfound.helper.openActivity
 import kotlinx.android.synthetic.main.activity_home.*
 
 class HomeActivity : AppCompatActivity() {
@@ -10,8 +12,6 @@ class HomeActivity : AppCompatActivity() {
         setContentView(R.layout.activity_home)
 
         setGradientText()
-
-
     }
 
     /*
