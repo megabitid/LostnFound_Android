@@ -66,15 +66,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName" />
 
-    <TextView
-        android:id="@+id/textView2"
+    <id.taufiq.lostandfound.helper.GradientTextView
+        android:id="@+id/tv_lihat_semua"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="24dp"
         android:fontFamily="@font/nunito_sans"
         android:text="@string/lihat_semua"
-        android:textColor="@color/orange_1"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageButton" />
@@ -105,14 +104,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
 
-    <TextView
+    <id.taufiq.lostandfound.helper.GradientTextView
+        android:id="@+id/tv_lihat_semua2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="24dp"
         android:fontFamily="@font/nunito_sans"
         android:text="@string/lihat_semua"
-        android:textColor="@color/orange_1"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
