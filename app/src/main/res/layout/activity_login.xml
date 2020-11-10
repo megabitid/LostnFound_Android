@@ -54,18 +54,17 @@
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textField"
+        android:id="@+id/text_email"
         android:layout_width="match_parent"
         android:layout_height="56dp"
         android:background="@drawable/background_text_radius_grey"
-        android:hint="Email/No. Telephone"
+        android:hint="@string/email_no_telephone"
         android:layout_marginTop="40dp"
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView3">
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/text_email"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@null"
@@ -78,20 +77,19 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayout2"
+        android:id="@+id/text_password"
         android:layout_width="match_parent"
         android:layout_height="56dp"
         android:layout_marginStart="24dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="24dp"
         android:background="@drawable/background_text_radius_grey"
-        android:hint="Password"
+        android:hint="@string/password"
         app:endIconMode="password_toggle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textField">
+        app:layout_constraintTop_toBottomOf="@+id/text_email">
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/text_password"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:inputType="textPassword"
@@ -111,11 +109,11 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="24dp"
         android:fontFamily="@font/nunito_sans"
-        android:text="Forgot password?"
+        android:text="@string/forgot_password"
         android:textColor="@color/blue_color"
         android:typeface="normal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textInputLayout2" />
+        app:layout_constraintTop_toBottomOf="@+id/text_password" />
 
     <Button
         android:id="@+id/btn_login"
@@ -125,7 +123,7 @@
         android:layout_marginEnd="24dp"
         android:background="@drawable/background_text_radius_gradient"
         android:fontFamily="@font/nunito_sans"
-        android:text="Login"
+        android:text="@string/login"
         android:textAllCaps="false"
         android:textColor="@color/grey_color"
         android:typeface="normal"
@@ -139,7 +137,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:text="Belum punya akun?"
+        android:text="@string/belum_punya_akun"
         android:layout_marginEnd="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -151,7 +149,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:layout_marginStart="6dp"
-        android:text="Daftar"
+        android:text="@string/daftar"
         app:layout_constraintStart_toEndOf="@+id/text"
         app:layout_constraintTop_toBottomOf="@+id/btn_login" />
 

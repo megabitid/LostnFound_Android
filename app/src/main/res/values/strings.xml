@@ -16,4 +16,13 @@
     <string name="logo">logo</string>
     <string name="back">back</string>
     <string name="enter_your_email_and_password_for_nsigning_in_thanks">Enter your email and password for \nsigning in. Thanks</string>
+    <string name="email_no_telephone">Email/No. Telephone</string>
+    <string name="password">Password</string>
+    <string name="forgot_password">Forgot password?</string>
+    <string name="belum_punya_akun">Belum punya akun?</string>
+    <string name="daftar">Daftar</string>
+    <string name="buat_akun_baru">Buat akun baru</string>
+    <string name="nama_lengkap">Nama lengkap</string>
+    <string name="buat_akun">Buat Akun</string>
+    <string name="log_out">Log Out</string>
 </resources>

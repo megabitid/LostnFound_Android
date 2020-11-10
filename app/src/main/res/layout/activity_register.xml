@@ -36,7 +36,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="24dp"
         android:fontFamily="@font/nunito_sans"
-        android:text="Buat akun baru"
+        android:text="@string/buat_akun_baru"
         android:textColor="@color/black_color"
         android:textSize="24sp"
         android:typeface="normal"
@@ -50,7 +50,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="36dp"
         android:background="@drawable/background_text_radius_grey"
-        android:hint="Nama lengkap"
+        android:hint="@string/nama_lengkap"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2">
         <com.google.android.material.textfield.TextInputEditText
@@ -73,7 +73,7 @@
         android:layout_marginStart="24dp"
         android:layout_marginTop="16dp"
         android:background="@drawable/background_text_radius_grey"
-        android:hint="Email/No. Telephone"
+        android:hint="@string/email_no_telephone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textName">
         <com.google.android.material.textfield.TextInputEditText
@@ -97,7 +97,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="24dp"
         android:background="@drawable/background_text_radius_grey"
-        android:hint="Password"
+        android:hint="@string/password"
         app:endIconMode="password_toggle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -147,7 +147,7 @@
         android:layout_marginEnd="24dp"
         android:background="@drawable/background_text_radius_gradient"
         android:fontFamily="@font/nunito_sans"
-        android:text="Buat Akun"
+        android:text="@string/buat_akun"
         android:textAllCaps="false"
         android:textColor="@color/grey_color"
         android:typeface="normal"
