@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1050768583033",
+    "firebase_url": "https://lostandfoundauth.firebaseio.com",
+    "project_id": "lostandfoundauth",
+    "storage_bucket": "lostandfoundauth.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1050768583033:android:49962fc1ccb3618a41a7a8",
+        "android_client_info": {
+          "package_name": "id.taufiq.lostandfound"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1050768583033-6tug9cffrqutdpo7qud63ne2vnbi4p52.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBd04ZtN8l_sd7bGNPL9DWhGvXU-RBECJ0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1050768583033-6tug9cffrqutdpo7qud63ne2vnbi4p52.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

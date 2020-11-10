@@ -6,4 +6,14 @@
     <string name="filter_button">filter button</string>
     <string name="lihat_semua">Lihat semua</string>
     <string name="terbaru">Terbaru</string>
+    <string name="login">Login</string>
+    <string name="sign_up_with_email_or_phone">Sign up with email or phone</string>
+    <string name="sudah_punya_akun">Sudah punya akun?</string>
+    <string name="continue_with_google">Continue with Google</string>
+    <string name="atau">Atau</string>
+    <string name="temukan_barangmu_yang_ketinggalan_ndi_stasiun_kereta">Temukan barangmu yang ketinggalan \ndi stasiun kereta!</string>
+    <string name="welcome_to_l_amp_f"><![CDATA[Welcome to L&F]]></string>
+    <string name="logo">logo</string>
+    <string name="back">back</string>
+    <string name="enter_your_email_and_password_for_nsigning_in_thanks">Enter your email and password for \nsigning in. Thanks</string>
 </resources>

@@ -1,8 +1,9 @@
-package id.taufiq.lostandfound
+package id.taufiq.lostandfound.ui.home
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import id.taufiq.lostandfound.R
 import id.taufiq.lostandfound.adapter.CategoryAdapter
 import id.taufiq.lostandfound.helper.showToast
 import id.taufiq.lostandfound.model.local.DataCategory
@@ -43,7 +44,7 @@ class HomeActivity : AppCompatActivity() {
         )
 
         data.add(
-            DataCategory(CategoryAdapter.VIEW_TYPE_TWO, "Lainnya",R.drawable.ic_category_icon),
+            DataCategory(CategoryAdapter.VIEW_TYPE_TWO, "Lainnya", R.drawable.ic_category_icon),
         )
 
 
