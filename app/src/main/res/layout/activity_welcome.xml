@@ -45,43 +45,27 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text_welcome" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/btn_continue_with_google"
+    <Button
+        android:id="@+id/btn_with_google"
         android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_marginTop="34dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
+        android:layout_marginTop="34dp"
+        android:layout_marginBottom="20dp"
+        android:fontFamily="@font/nunito_sans"
+        android:typeface="normal"
         android:background="@drawable/bg_image_button_border"
+        android:drawableStart="@drawable/img_google"
+        android:paddingStart="40dp"
+        android:paddingEnd="40dp"
+        android:text="Continue with google"
+        android:textAllCaps="false"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_description">
-
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="32dp"
-            android:src="@drawable/img_google"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:contentDescription="@string/continue_with_google" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/nunito_sans"
-            android:text="@string/continue_with_google"
-            android:textColor="@color/black_color"
-            android:typeface="normal"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/imageView"
-            app:layout_constraintTop_toTopOf="parent" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        app:layout_constraintTop_toBottomOf="@+id/text_description" />
 
     <TextView
         android:id="@+id/text_or"
@@ -91,33 +75,24 @@
         android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_continue_with_google" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_with_google" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/btn_singin_with_phone"
+    <Button
+        android:id="@+id/btn_create_account"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:background="@drawable/background_text_radius_gradient"
-        android:layout_marginTop="8dp"
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/background_text_radius_gradient"
+        android:fontFamily="@font/nunito_sans"
+        android:text="sign up with email or phone"
+        android:textAllCaps="false"
+        android:textColor="@color/grey_color"
+        android:typeface="normal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_or">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/nunito_sans"
-            android:text="@string/sign_up_with_email_or_phone"
-            android:typeface="normal"
-            android:textColor="@color/grey_color"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        app:layout_constraintTop_toBottomOf="@+id/text_or" />
 
     <TextView
         android:id="@+id/text"
@@ -128,7 +103,7 @@
         android:layout_marginEnd="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_singin_with_phone" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_create_account" />
 
     <id.taufiq.lostandfound.helper.GradientTextView
         android:id="@+id/btn_login"
@@ -138,6 +113,6 @@
         android:layout_marginStart="6dp"
         android:layout_marginTop="24dp"
         app:layout_constraintStart_toEndOf="@+id/text"
-        app:layout_constraintTop_toBottomOf="@+id/btn_singin_with_phone" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_create_account" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

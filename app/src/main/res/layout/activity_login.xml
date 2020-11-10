@@ -117,31 +117,22 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout2" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/btn_singin_with_phone"
+    <Button
+        android:id="@+id/btn_login"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:background="@drawable/background_text_radius_gradient"
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
-        android:layout_marginTop="24dp"
+        android:background="@drawable/background_text_radius_gradient"
+        android:fontFamily="@font/nunito_sans"
+        android:text="Login"
+        android:textAllCaps="false"
+        android:textColor="@color/grey_color"
+        android:typeface="normal"
+        android:layout_marginTop="48dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_forgot_password">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/nunito_sans"
-            android:text="Login"
-            android:textColor="@color/grey_color"
-            android:typeface="normal"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        app:layout_constraintTop_toBottomOf="@+id/btn_forgot_password" />
 
     <TextView
         android:id="@+id/text"
@@ -152,16 +143,16 @@
         android:layout_marginEnd="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_singin_with_phone" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_login" />
 
     <id.taufiq.lostandfound.helper.GradientTextView
         android:id="@+id/btn_registration"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Daftar"
-        android:layout_marginStart="6dp"
         android:layout_marginTop="24dp"
+        android:layout_marginStart="6dp"
+        android:text="Daftar"
         app:layout_constraintStart_toEndOf="@+id/text"
-        app:layout_constraintTop_toBottomOf="@+id/btn_singin_with_phone" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_login" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

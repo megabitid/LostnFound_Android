@@ -16,12 +16,15 @@ class LoginActivity : AppCompatActivity() {
         btn_back.setOnClickListener {
             Intent(this, WelcomeActivity::class.java).also {
                 startActivity(it)
+                finish()
             }
         }
 
         btn_registration.setOnClickListener {
             Intent(this, RegisterActivity::class.java).also {
+                it.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                 startActivity(it)
+                finish()
             }
         }
     }
