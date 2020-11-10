@@ -9,4 +9,4 @@ import kotlinx.android.parcel.Parcelize
  */
 
 @Parcelize
-data class DataCategory(val viewType: Int, val title: String, val image: String) : Parcelable
+data class DataCategory(val viewType: Int, val title: String, val image: Int? = null) : Parcelable

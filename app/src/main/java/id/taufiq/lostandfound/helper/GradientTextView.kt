@@ -5,6 +5,7 @@ import android.content.Context
 import android.graphics.LinearGradient
 import android.graphics.Shader
 import android.util.AttributeSet
+import android.widget.TextView
 import androidx.core.content.ContextCompat
 import id.taufiq.lostandfound.R
 
@@ -12,10 +13,9 @@ import id.taufiq.lostandfound.R
  * Created By Taufiq on 11/9/2020.
  *
  */
-class GradientTextView : androidx.appcompat.widget.AppCompatTextView {
+@SuppressLint("AppCompatCustomView")
+class GradientTextView : TextView {
 
-    var startColor = 0
-    var endColor = 0
 
     constructor(context: Context) : super(context)
     constructor(context: Context, attributeSet: AttributeSet) : super(context, attributeSet)
@@ -23,10 +23,6 @@ class GradientTextView : androidx.appcompat.widget.AppCompatTextView {
         context, attributeSet, defStyleAttr
     )
 
-    fun setColorGradient(startColor: Int, endColor: Int) {
-        this.startColor = startColor
-        this.endColor = endColor
-    }
 
 
     @SuppressLint("DrawAllocation")

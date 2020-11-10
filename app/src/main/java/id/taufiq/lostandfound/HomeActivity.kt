@@ -1,24 +1,52 @@
 package id.taufiq.lostandfound
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
-import id.taufiq.lostandfound.helper.openActivity
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import id.taufiq.lostandfound.adapter.CategoryAdapter
+import id.taufiq.lostandfound.helper.showToast
+import id.taufiq.lostandfound.model.local.DataCategory
 import kotlinx.android.synthetic.main.activity_home.*
 
 class HomeActivity : AppCompatActivity() {
+    private val data = ArrayList<DataCategory>()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
 
-        setGradientText()
+        listOfData()
+        initRecyclerView()
     }
 
-    /*
-    * set gradient to custom textview
-    * */
-    fun setGradientText(){
-        tv_lihat_semua.setColorGradient(R.color.orange_1,R.color.orange_2)
-        tv_lihat_semua2.setColorGradient(R.color.orange_1,R.color.orange_2)
+    private fun initRecyclerView() {
+        rv_category.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        rv_category.adapter = CategoryAdapter(this,data){
+            showToast("clicked ${it.title}")
+        }
     }
+
+
+    private fun listOfData() {
+        data.add(
+            DataCategory(
+                CategoryAdapter.VIEW_TYPE_ONE, "Elektronik", R.drawable.image_elektronic
+            )
+        )
+        data.add(
+            DataCategory(
+                CategoryAdapter.VIEW_TYPE_ONE, "Tas & Dompet", R.drawable.image_tas
+            )
+        )
+        data.add(
+            DataCategory(CategoryAdapter.VIEW_TYPE_ONE, "Perhiasan", R.drawable.image_perhiasan),
+        )
+
+        data.add(
+            DataCategory(CategoryAdapter.VIEW_TYPE_TWO, "Lainnya",R.drawable.ic_category_icon),
+        )
+
+
+    }
+
 }
