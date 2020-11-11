@@ -12,7 +12,9 @@
         android:orientation="vertical"
         app:cardCornerRadius="8dp"
         app:cardElevation="5dp"
-        android:layout_margin="8dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -59,7 +61,8 @@
                 android:layout_height="wrap_content"
                 tools:src="@drawable/ic_image_hilang"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"/>
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="4dp"/>
 
         </LinearLayout>
 
