@@ -47,6 +47,9 @@ class HomeActivity : AppCompatActivity() {
         )
 
 
+        data.subList(0,3)
+
+
     }
 
 }

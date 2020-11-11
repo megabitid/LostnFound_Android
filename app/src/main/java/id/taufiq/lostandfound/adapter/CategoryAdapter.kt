@@ -44,6 +44,8 @@ class CategoryAdapter(
 
         fun binding(context: Context, data: DataCategory, listener: (DataCategory) -> Unit) {
             with(itemView) {
+                tv_category2.text = data.title
+                data.image?.let { iv_category.setImageResource(it) }
                 setOnClickListener { listener(data) }
             }
 

@@ -11,5 +11,8 @@
     <color name="grey_color">#f1f1f1</color>
     <color name="black_color">#212121</color>
     <color name="grey_color_paragraf">#7D7D7D</color>
+    <color name="border_color">#99E4E4E4</color>
+
+
 
 </resources>
