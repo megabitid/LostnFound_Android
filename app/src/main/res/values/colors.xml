@@ -12,7 +12,9 @@
     <color name="black_color">#212121</color>
     <color name="grey_color_paragraf">#7D7D7D</color>
     <color name="border_color">#99E4E4E4</color>
-
+    <color name="text_color">#AAA</color>
+    <color name="color_hlg">#E24343</color>
+    <color name="color_hlg_bg">#33E24343</color>
 
 
 </resources>
