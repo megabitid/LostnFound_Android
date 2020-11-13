@@ -1,9 +1,15 @@
 package id.taufiq.lostandfound.ui.welcome
 
+import android.app.Activity
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -11,12 +17,10 @@ import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import id.taufiq.lostandfound.R
-import id.taufiq.lostandfound.ui.home.HomeActivity
-import id.taufiq.lostandfound.ui.login.LoginActivity
-import id.taufiq.lostandfound.ui.register.RegisterActivity
-import kotlinx.android.synthetic.main.activity_welcome.*
+import kotlinx.android.synthetic.main.fragment_welcome.*
 
-class WelcomeActivity : AppCompatActivity() {
+class WelcomeFragment : Fragment() {
+
     companion object {
         private const val RC_SIGN_IN = 120
     }
@@ -24,34 +28,31 @@ class WelcomeActivity : AppCompatActivity() {
     private lateinit var mAuth: FirebaseAuth
     private lateinit var googleSignInClient: GoogleSignInClient
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_welcome)
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken(getString(R.string.default_web_client_id))
             .requestEmail()
             .build()
 
-        googleSignInClient = GoogleSignIn.getClient(this, gso)
+        googleSignInClient = GoogleSignIn.getClient(requireActivity(), gso)
 
         mAuth = FirebaseAuth.getInstance()
 
-        btn_login.setOnClickListener {
-            Intent(this, LoginActivity::class.java).also {
-                startActivity(it)
-            }
-        }
+        btn_create_account.setOnClickListener(
+            Navigation.createNavigateOnClickListener(R.id.action_welcomeFragment_to_registerFragment)
+        )
 
-        btn_create_account.setOnClickListener {
-            Intent(this, RegisterActivity::class.java).also {
-                startActivity(it)
-            }
-        }
+        btn_login.setOnClickListener(
+            Navigation.createNavigateOnClickListener(R.id.action_welcomeFragment_to_loginFragment)
+        )
 
         btn_with_google.setOnClickListener {
             signIn()
         }
+
     }
 
     private fun signIn() {
@@ -68,13 +69,13 @@ class WelcomeActivity : AppCompatActivity() {
             if (task.isSuccessful) {
                 try {
                     val account = task.getResult(ApiException::class.java)!!
-                    Log.d("SignInActivity", "firebaseAuthWithGoogle:" + account.id)
+                    Log.d("WelcomeFragment", "firebaseAuthWithGoogle:" + account.id)
                     firebaseAuthWithGoogle(account.idToken!!)
                 } catch (e: ApiException) {
-                    Log.w("SignInActivity", "Google sign in failed", e)
+                    Log.w("WelcomeFragment", "Google sign in failed", e)
                 }
             } else {
-                Log.w("SignInActivity", exception.toString())
+                Log.w("WelcomeFragment", exception.toString())
             }
         }
     }
@@ -82,28 +83,30 @@ class WelcomeActivity : AppCompatActivity() {
     private fun firebaseAuthWithGoogle(idToken: String) {
         val credential = GoogleAuthProvider.getCredential(idToken, null)
         mAuth.signInWithCredential(credential)
-            .addOnCompleteListener(this) { task ->
-                if (task.isSuccessful) {
-                    Log.d("SignInActivity", "signInWithCredential:success")
-                    Intent(this, HomeActivity::class.java).also {
-                        it.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                        startActivity(it)
-                        finish()
-                    }
+            .addOnCompleteListener(Activity()) {
+                if (it.isSuccessful) {
+                    Log.d("WelcomeFragment", "signInWithCredential:success")
+                    findNavController().navigate(R.id.action_welcomeFragment_to_homeFragment)
                 } else {
-                    Log.d("SignInActivity", "signInWithCredential:failure")
+                    Log.d("WelcomeFragment", "signInWithCredential:failure")
                 }
             }
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_welcome, container, false)
     }
 
     override fun onStart() {
         super.onStart()
         val user = mAuth.currentUser
         if(user != null){
-            Intent(this, HomeActivity::class.java).also {
-                startActivity(it)
-                finish()
-            }
+            findNavController().navigate(R.id.action_welcomeFragment_to_homeFragment)
         }
     }
+
 }
