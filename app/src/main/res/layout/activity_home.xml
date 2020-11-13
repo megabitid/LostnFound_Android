@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HomeActivity">
+    tools:context=".ui.home.HomeActivity">
 
 
     <EditText
@@ -35,7 +35,7 @@
         android:background="@drawable/bg_image_button"
         android:contentDescription="@string/filter_button"
         android:elevation="10dp"
-        android:src="@drawable/ic_filter_icon"
+        android:src="@drawable/ic_filter"
         app:layout_constraintBottom_toBottomOf="@+id/editTextTextPersonName"
         app:layout_constraintEnd_toStartOf="@+id/imageButton"
         app:layout_constraintTop_toTopOf="@+id/editTextTextPersonName" />
@@ -79,9 +79,9 @@
         app:layout_constraintTop_toBottomOf="@+id/imageButton" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
+        android:id="@+id/rv_category"
         android:layout_width="0dp"
-        android:layout_height="50dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="24dp"
@@ -102,7 +102,7 @@
         android:textColor="@color/black_color"
         android:textSize="@dimen/text_size_title"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
+        app:layout_constraintTop_toBottomOf="@+id/rv_category" />
 
     <id.taufiq.lostandfound.helper.GradientTextView
         android:id="@+id/tv_lihat_semua2"
@@ -114,7 +114,7 @@
         android:text="@string/lihat_semua"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
+        app:layout_constraintTop_toBottomOf="@+id/rv_category" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
@@ -125,6 +125,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView4" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
