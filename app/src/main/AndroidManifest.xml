@@ -10,15 +10,6 @@
         android:roundIcon="@drawable/img_logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity
-            android:name=".ui.register.RegisterActivity"
-            android:theme="@style/NoActionBar"/>
-        <activity
-            android:name=".ui.login.LoginActivity"
-            android:theme="@style/NoActionBar" />
-        <activity
-            android:name=".ui.welcome.WelcomeActivity"
-            android:theme="@style/NoActionBar"/>
         <activity android:name=".ui.home.HomeActivity" />
         <activity
             android:name=".ui.MainActivity"

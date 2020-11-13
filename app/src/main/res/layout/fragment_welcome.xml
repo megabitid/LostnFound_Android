@@ -64,7 +64,7 @@
             android:drawableStart="@drawable/img_google"
             android:paddingStart="40dp"
             android:paddingEnd="40dp"
-            android:text="@string/continue_with_google"
+            android:text="@string/sign_up_with_google"
             android:textAllCaps="false"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"

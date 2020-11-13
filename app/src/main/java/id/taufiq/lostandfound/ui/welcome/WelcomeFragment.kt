@@ -8,7 +8,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -28,7 +27,6 @@ class WelcomeFragment : Fragment() {
     private lateinit var mAuth: FirebaseAuth
     private lateinit var googleSignInClient: GoogleSignInClient
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -41,18 +39,17 @@ class WelcomeFragment : Fragment() {
 
         mAuth = FirebaseAuth.getInstance()
 
-        btn_create_account.setOnClickListener(
-            Navigation.createNavigateOnClickListener(R.id.action_welcomeFragment_to_registerFragment)
-        )
+        btn_create_account.setOnClickListener {
+            findNavController().navigate(R.id.action_welcomeFragment_to_registerFragment)
+        }
 
-        btn_login.setOnClickListener(
-            Navigation.createNavigateOnClickListener(R.id.action_welcomeFragment_to_loginFragment)
-        )
+        btn_login.setOnClickListener {
+            findNavController().navigate(R.id.action_welcomeFragment_to_loginFragment)
+        }
 
         btn_with_google.setOnClickListener {
             signIn()
         }
-
     }
 
     private fun signIn() {
@@ -83,7 +80,7 @@ class WelcomeFragment : Fragment() {
     private fun firebaseAuthWithGoogle(idToken: String) {
         val credential = GoogleAuthProvider.getCredential(idToken, null)
         mAuth.signInWithCredential(credential)
-            .addOnCompleteListener(Activity()) {
+            .addOnCompleteListener(requireActivity()) {
                 if (it.isSuccessful) {
                     Log.d("WelcomeFragment", "signInWithCredential:success")
                     findNavController().navigate(R.id.action_welcomeFragment_to_homeFragment)

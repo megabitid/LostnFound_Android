@@ -1,6 +1,5 @@
 package id.taufiq.lostandfound.ui.login
 
-import android.app.Activity
 import android.content.ContentValues.TAG
 import android.os.Bundle
 import android.util.Log
@@ -70,7 +69,7 @@ class LoginFragment : Fragment() {
     private fun loginUser(email: String, password: String) {
 
         mAuth.signInWithEmailAndPassword(email, password)
-            .addOnCompleteListener(Activity()) { task ->
+            .addOnCompleteListener(requireActivity()) { task ->
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
                     findNavController().navigate(R.id.action_loginFragment_to_homeFragment)

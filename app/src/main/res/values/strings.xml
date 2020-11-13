@@ -9,7 +9,6 @@
     <string name="login">Login</string>
     <string name="sign_up_with_email_or_phone">Sign up with email or phone</string>
     <string name="sudah_punya_akun">Sudah punya akun?</string>
-    <string name="continue_with_google">Continue with Google</string>
     <string name="atau">Atau</string>
     <string name="temukan_barangmu_yang_ketinggalan_ndi_stasiun_kereta">Temukan barangmu yang ketinggalan \ndi stasiun kereta!</string>
     <string name="welcome_to_l_amp_f"><![CDATA[Welcome to L&F]]></string>
@@ -27,4 +26,7 @@
     <string name="log_out">Log Out</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="sign_up_with_google">Sign up with Google</string>
+    <string name="welcome_to_home">Welcome To Home</string>
+    <string name="i_agree_with_terms_amp_privacy_police"><![CDATA[I Agree with Terms & Privacy Police]]></string>
 </resources>
