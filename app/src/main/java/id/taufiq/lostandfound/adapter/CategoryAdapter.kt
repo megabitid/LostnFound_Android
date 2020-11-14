@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.RecyclerView
 import id.taufiq.lostandfound.R
 import id.taufiq.lostandfound.model.local.DataCategory
 import kotlinx.android.synthetic.main.row_item_category.view.*
-import kotlinx.android.synthetic.main.row_item_category.view.iv_category
 import kotlinx.android.synthetic.main.row_item_category2.view.*
 
 
@@ -30,10 +29,10 @@ class CategoryAdapter(
 
     class CategoryViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        fun binding(context: Context, data: DataCategory, listener: (DataCategory) -> Unit) {
+        fun binding(data: DataCategory, listener: (DataCategory) -> Unit) {
             with(itemView) {
                 tv_category.text = data.title
-                data.image?.let { iv_category.setImageResource(it) }
+                iv_category.setImageResource(data.image!!)
                 setOnClickListener { listener(data) }
             }
 
@@ -42,8 +41,10 @@ class CategoryAdapter(
 
     class CategoryViewHolder1(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        fun binding(context: Context, data: DataCategory, listener: (DataCategory) -> Unit) {
+        fun binding(data: DataCategory, listener: (DataCategory) -> Unit) {
             with(itemView) {
+                tv_category2.text = data.title
+                iv_category2.setImageResource(data.image!!)
                 setOnClickListener { listener(data) }
             }
 
@@ -73,9 +74,9 @@ class CategoryAdapter(
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         if (data[position].viewType == VIEW_TYPE_ONE) {
-            (holder as CategoryViewHolder).binding(context, data[position], listener)
+            (holder as CategoryViewHolder).binding(data[position], listener)
         } else {
-            (holder as CategoryViewHolder1).binding(context, data[position], listener)
+            (holder as CategoryViewHolder1).binding(data[position], listener)
         }
     }
 

@@ -1,6 +1,5 @@
 package id.taufiq.lostandfound.ui.welcome
 
-import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -101,7 +100,7 @@ class WelcomeFragment : Fragment() {
     override fun onStart() {
         super.onStart()
         val user = mAuth.currentUser
-        if(user != null){
+        if (user != null) {
             findNavController().navigate(R.id.action_welcomeFragment_to_homeFragment)
         }
     }

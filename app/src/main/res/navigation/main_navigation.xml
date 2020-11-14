@@ -67,5 +67,28 @@
             app:popUpTo="@id/welcomeFragment"
             app:popUpToInclusive="true" />
     </fragment>
+    <fragment
+        android:id="@+id/laporFragment"
+        android:name="id.taufiq.lostandfound.LaporFragment"
+        android:label="fragment_lapor"
+        tools:layout="@layout/fragment_lapor" />
+    <fragment
+        android:id="@+id/akunFragment"
+        android:name="id.taufiq.lostandfound.AkunFragment"
+        android:label="fragment_akun"
+        tools:layout="@layout/fragment_akun" >
+        <action
+            android:id="@+id/action_akunFragment_to_welcomeFragment"
+            app:destination="@id/welcomeFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popUpTo="@id/welcomeFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/notifikasiFragment"
+        android:name="id.taufiq.lostandfound.NotifikasiFragment"
+        android:label="fragment_notifikasi"
+        tools:layout="@layout/fragment_notifikasi" />
 
 </navigation>

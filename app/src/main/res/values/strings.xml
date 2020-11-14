@@ -29,4 +29,8 @@
     <string name="sign_up_with_google">Sign up with Google</string>
     <string name="welcome_to_home">Welcome To Home</string>
     <string name="i_agree_with_terms_amp_privacy_police"><![CDATA[I Agree with Terms & Privacy Police]]></string>
+    <string name="home">Home</string>
+    <string name="lapor">Lapor</string>
+    <string name="notifikasi">Notifikasi</string>
+    <string name="akun">Akun</string>
 </resources>
