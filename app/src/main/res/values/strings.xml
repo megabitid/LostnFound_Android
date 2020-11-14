@@ -29,4 +29,8 @@
     <string name="sign_up_with_google">Sign up with Google</string>
     <string name="welcome_to_home">Welcome To Home</string>
     <string name="i_agree_with_terms_amp_privacy_police"><![CDATA[I Agree with Terms & Privacy Police]]></string>
+    <string name="verify_your_number">Verify your number</string>
+    <string name="enter_the_one_time_password_sent_to">Enter the one-time password sent to</string>
+    <string name="did_n_get_the_code">Did’n get the code?</string>
+    <string name="send_it_again_r">Send it again!r</string>
 </resources>
