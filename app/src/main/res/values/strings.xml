@@ -24,7 +24,6 @@
     <string name="nama_lengkap">Nama lengkap</string>
     <string name="buat_akun">Buat Akun</string>
     <string name="log_out">Log Out</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="sign_up_with_google">Sign up with Google</string>
     <string name="welcome_to_home">Welcome To Home</string>
@@ -33,4 +32,7 @@
     <string name="lapor">Lapor</string>
     <string name="notifikasi">Notifikasi</string>
     <string name="akun">Akun</string>
+    <string name="lorem_ipsum">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</string>
+    <string name="item_barang_hilang">item barang hilang</string>
+    <string name="status_barang">status barang</string>
 </resources>

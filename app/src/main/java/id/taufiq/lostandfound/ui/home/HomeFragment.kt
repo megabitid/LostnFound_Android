@@ -5,21 +5,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
 import id.taufiq.lostandfound.R
 import id.taufiq.lostandfound.adapter.CategoryAdapter
+import id.taufiq.lostandfound.adapter.TerbaruAdapter
 import id.taufiq.lostandfound.helper.showToast
 import id.taufiq.lostandfound.model.local.DataCategory
+import id.taufiq.lostandfound.model.local.DataTerbaru
 import kotlinx.android.synthetic.main.fragment_home.*
 
 class HomeFragment : Fragment() {
     private lateinit var mAuth: FirebaseAuth
     private val data = ArrayList<DataCategory>()
+    private val dataTerbaru = ArrayList<DataTerbaru>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,6 +39,8 @@ class HomeFragment : Fragment() {
 
         listOfData()
         initRecyclerView()
+        dataTerbaru()
+        initListTerbaru()
 
 
         // Nav host fragment
@@ -58,6 +62,15 @@ class HomeFragment : Fragment() {
         rv_category.adapter = context?.let {
             CategoryAdapter(it, data) {
                 context?.showToast("clicked ${it.title}")
+            }
+        }
+    }
+
+    private fun initListTerbaru() {
+        rv_terbaru.layoutManager = GridLayoutManager(context, 2)
+        rv_terbaru.adapter = context?.let {
+            TerbaruAdapter(it, dataTerbaru) {
+
             }
         }
     }
@@ -86,6 +99,41 @@ class HomeFragment : Fragment() {
 
     }
 
+
+    private fun dataTerbaru() {
+        dataTerbaru.add(
+            DataTerbaru(
+                R.drawable.tas, "6 November 2020", "Tas Orange", R.drawable.ic_image_hilang,
+                "Barang", "Gucci", "Orange", resources.getString(R.string.lorem_ipsum)
+            )
+        )
+
+
+        dataTerbaru.add(
+            DataTerbaru(
+                R.drawable.hp, "7 November 2020", "Hp Iphone", R.drawable.ic_image_ketemu,
+                "Elektronik", "Iphone", "Hitam", resources.getString(R.string.lorem_ipsum)
+            )
+        )
+
+
+        dataTerbaru.add(
+            DataTerbaru(
+                R.drawable.tas, "6 November 2020", "Tas Orange", R.drawable.ic_image_hilang,
+                "Barang", "Gucci", "Orange", resources.getString(R.string.lorem_ipsum)
+            )
+        )
+
+
+        dataTerbaru.add(
+            DataTerbaru(
+                R.drawable.hp, "7 November 2020", "Hp Iphone", R.drawable.ic_image_ketemu,
+                "Elektronik", "Iphone", "Hitam", resources.getString(R.string.lorem_ipsum)
+            )
+        )
+
+
+    }
 
 
 }
