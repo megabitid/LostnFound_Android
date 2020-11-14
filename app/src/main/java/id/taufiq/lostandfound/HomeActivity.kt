@@ -20,19 +20,19 @@ class HomeActivity : AppCompatActivity() {
         setContentView(R.layout.activity_home)
 
         // dummy data
-        dataCategory()
+//        dataCategory()
         dataTerbaru()
 
-        initListCategory()
+//        initListCategory()
         initListTerbaru()
     }
 
-    private fun initListCategory() {
-        rv_category.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-        rv_category.adapter = CategoryAdapter(this,data){
-            showToast("clicked ${it.title}")
-        }
-    }
+//    private fun initListCategory() {
+//        rv_category.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+//        rv_category.adapter = CategoryAdapter(this,data){
+//            showToast("clicked ${it.title}")
+//        }
+//    }
 
 
 
@@ -44,30 +44,30 @@ class HomeActivity : AppCompatActivity() {
     }
 
 
-    private fun dataCategory() {
-        data.add(
-            DataCategory(
-                CategoryAdapter.VIEW_TYPE_ONE, "Elektronik", R.drawable.image_elektronic
-            )
-        )
-        data.add(
-            DataCategory(
-                CategoryAdapter.VIEW_TYPE_ONE, "Tas & Dompet", R.drawable.image_tas
-            )
-        )
-        data.add(
-            DataCategory(CategoryAdapter.VIEW_TYPE_ONE, "Perhiasan", R.drawable.image_perhiasan),
-        )
-
-        data.add(
-            DataCategory(CategoryAdapter.VIEW_TYPE_TWO, "Lainnya",R.drawable.ic_category_icon),
-        )
-
-
-        data.subList(0,3)
-
-
-    }
+//    private fun dataCategory() {
+//        data.add(
+//            DataCategory(
+//                CategoryAdapter.VIEW_TYPE_ONE, "Elektronik", R.drawable.image_elektronic
+//            )
+//        )
+//        data.add(
+//            DataCategory(
+//                CategoryAdapter.VIEW_TYPE_ONE, "Tas & Dompet", R.drawable.image_tas
+//            )
+//        )
+//        data.add(
+//            DataCategory(CategoryAdapter.VIEW_TYPE_ONE, "Perhiasan", R.drawable.image_perhiasan),
+//        )
+//
+//        data.add(
+//            DataCategory(CategoryAdapter.VIEW_TYPE_TWO, "Lainnya",R.drawable.ic_category_icon),
+//        )
+//
+//
+//        data.subList(0,3)
+//
+//
+//    }
 
     private fun dataTerbaru() {
         dataTerbaru.add(
