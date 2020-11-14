@@ -66,6 +66,11 @@
             app:destination="@id/welcomeFragment"
             app:popUpTo="@id/welcomeFragment"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_homeFragment_to_detailHome"
+            app:destination="@id/detailHome"
+            app:popUpTo="@id/detailHome"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/laporFragment"
@@ -90,5 +95,15 @@
         android:name="id.taufiq.lostandfound.NotifikasiFragment"
         android:label="fragment_notifikasi"
         tools:layout="@layout/fragment_notifikasi" />
+    <fragment
+        android:id="@+id/detailHome"
+        android:name="id.taufiq.lostandfound.DetailHome"
+        android:label="fragment_detail_home"
+        tools:layout="@layout/fragment_detail_home" >
+        <action
+            android:id="@+id/action_detailHome_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/homeFragment" />
+    </fragment>
 
 </navigation>

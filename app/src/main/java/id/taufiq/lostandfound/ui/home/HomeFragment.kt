@@ -71,6 +71,8 @@ class HomeFragment : Fragment() {
         rv_terbaru.adapter = context?.let {
             TerbaruAdapter(it, dataTerbaru) {
 
+
+
             }
         }
     }
