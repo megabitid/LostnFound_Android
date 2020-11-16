@@ -6,14 +6,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 
 class ApiClient {
-//    fun getClientInstance(): Retrofit {
-//        val gson = GsonBuilder().setLenient().create()
-//        return Retrofit.Builder()
-//            .baseUrl("https://megabit-lostnfound.herokuapp.com/")
-//            .addConverterFactory(GsonConverterFactory.create(gson))
-//            .build()
-//    }
-
     private lateinit var apiService: ApiService
 
     fun getApiService(): ApiService {

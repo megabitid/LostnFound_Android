@@ -1,23 +1,30 @@
 package id.taufiq.lostandfound.ui.register
 
 import android.os.Bundle
+import android.util.Log
 import android.util.Patterns
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.CheckBox
+import android.widget.Toast
 import androidx.core.content.ContextCompat.getColor
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import id.taufiq.lostandfound.R
+import id.taufiq.lostandfound.data.remote.*
+import id.taufiq.lostandfound.helper.Constants
+import id.taufiq.lostandfound.helper.SessionManager
 import kotlinx.android.synthetic.main.fragment_register.*
 import kotlinx.android.synthetic.main.fragment_register.view.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 
 @Suppress("LABEL_NAME_CLASH")
 class RegisterFragment : Fragment() {
-//    private lateinit var mAuth: FirebaseAuth
     private lateinit var checkBox: CheckBox
     private lateinit var button: Button
 
@@ -33,8 +40,6 @@ class RegisterFragment : Fragment() {
 
         button = view.findViewById(R.id.btn_create_account)
         checkBox = view.findViewById(R.id.checkbox1)
-
-//        mAuth = FirebaseAuth.getInstance()
 
         btn_back.setOnClickListener {
             findNavController().navigate(R.id.action_registerFragment_to_welcomeFragment)
@@ -73,6 +78,8 @@ class RegisterFragment : Fragment() {
                        view.text_password.requestFocus()
                        return@setOnClickListener
                    }
+
+                   registerUser(name, email, password, Constants.IMG_DEFAULT)
                }
            }else{
                button.isEnabled = false
@@ -82,19 +89,38 @@ class RegisterFragment : Fragment() {
         }
     }
 
-//    private fun singupUser(email: String, password: String) {
-//        mAuth.createUserWithEmailAndPassword(email, password)
-//            .addOnCompleteListener(requireActivity()) { task ->
-//                if (task.isSuccessful) {
-//                    // Sign in success, update UI with the signed-in user's information
-//                    Log.d(TAG, "createUserWithEmail:success")
-//                    findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
-//                } else {
-//                    // If sign in fails, display a message to the user.
-//                    Log.w(TAG, "createUserWithEmail:failure", task.exception)
-//                    Toast.makeText(context, "Authentication failed.",
-//                        Toast.LENGTH_SHORT).show()
-//                }
-//            }
-//    }
+    private fun registerUser(name : String, email : String, password : String, image : String){
+        val sessionManager = SessionManager(requireContext())
+        val apiClient = ApiClient()
+
+        apiClient.getApiService().createUser(name, email, password, image)
+            .enqueue(object : Callback<RegisterResponse> {
+                override fun onResponse(
+                    call: Call<RegisterResponse>,
+                    response: Response<RegisterResponse>
+                ) {
+                    try {
+                        val user = response.body()
+                        if (user != null) {
+                            if(user.email != null)
+                                Log.d("email", user.email.toString())
+                                Log.d("token", user.token.toString())
+                                Toast.makeText(context , "Register Berhasil.", Toast.LENGTH_SHORT).show()
+                                sessionManager.saveAuthToken(user.token.toString())
+                                findNavController().navigate(R.id.action_registerFragment_to_homeFragment)
+                        } else {
+                            Toast.makeText(context , "Email Sudah Terdaftar", Toast.LENGTH_SHORT).show()
+                        }
+                    } catch (exception: Exception){
+                        Log.e("exception", exception.message.toString())
+                    }
+                }
+
+                override fun onFailure(call: Call<RegisterResponse>, t: Throwable) {
+                    Log.e("Error", t.message.toString())
+                    Toast.makeText(context , "Register Gagal.", Toast.LENGTH_SHORT).show()
+                }
+
+            })
+    }
 }

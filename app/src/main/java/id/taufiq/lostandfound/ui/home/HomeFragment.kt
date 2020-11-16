@@ -9,7 +9,6 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import id.taufiq.lostandfound.R
 import id.taufiq.lostandfound.data.remote.ApiClient
-import id.taufiq.lostandfound.data.remote.ApiService
 import id.taufiq.lostandfound.data.remote.LogoutResponse
 import id.taufiq.lostandfound.helper.SessionManager
 import kotlinx.android.synthetic.main.fragment_home.*
@@ -49,8 +48,14 @@ class HomeFragment : Fragment() {
                     call: Call<LogoutResponse>,
                     response: Response<LogoutResponse>
                 ) {
-                    Log.d("message", response.body()?.message.toString())
-                    findNavController().navigate(R.id.action_homeFragment_to_welcomeFragment)
+                    if (response.body()?.message.equals("The token has been blacklisted")) {
+                        sessionManager.clearLoggedInToken()
+                        findNavController().navigate(R.id.action_homeFragment_to_welcomeFragment)
+                    } else {
+                        Log.d("message", response.body()?.message.toString())
+                        sessionManager.clearLoggedInToken()
+                        findNavController().navigate(R.id.action_homeFragment_to_welcomeFragment)
+                    }
                 }
 
                 override fun onFailure(call: Call<LogoutResponse>, t: Throwable) {
@@ -59,5 +64,4 @@ class HomeFragment : Fragment() {
 
             })
     }
-
 }

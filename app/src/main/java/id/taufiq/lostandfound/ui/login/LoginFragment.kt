@@ -60,7 +60,11 @@ class LoginFragment : Fragment() {
                 return@setOnClickListener
             }
 
-            if (password.isEmpty() || password.length < 8)
+            if (password.isEmpty() || password.length < 8){
+                view?.text_password?.error = "Password tidak valid!"
+                view?.text_password?.requestFocus()
+                return@setOnClickListener
+            }
 
             loginUser(email, password)
         }
@@ -76,16 +80,20 @@ class LoginFragment : Fragment() {
 
         apiClient.getApiService().loginUser(request).enqueue(object : Callback<LoginResponse>{
             override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
-                val user = response.body()
-                if (user != null) {
-                    if(user.email != null)
-                        Log.d("email", user.email.toString())
-                        Log.d("token", user.token.toString())
-                        Toast.makeText(context , "Login Berhasil.", Toast.LENGTH_SHORT).show()
-                        sessionManager.saveAuthToken(user.token.toString())
-                        findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
-                } else {
-                    Toast.makeText(context , "Email atau Password salah!", Toast.LENGTH_SHORT).show()
+                try {
+                    val user = response.body()
+                    if (user != null) {
+                        if(user.email != null)
+                            Log.d("email", user.email.toString())
+                            Log.d("token", user.token.toString())
+                            Toast.makeText(context , "Login Berhasil.", Toast.LENGTH_SHORT).show()
+                            sessionManager.saveAuthToken(user.token.toString())
+                            findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
+                    } else {
+                        Toast.makeText(context , "Email atau Password salah!", Toast.LENGTH_SHORT).show()
+                    }
+                } catch (exception: Exception){
+                    Log.e("exception", exception.message.toString())
                 }
             }
 

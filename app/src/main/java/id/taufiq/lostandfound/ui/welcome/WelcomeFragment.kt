@@ -15,29 +15,32 @@ import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import id.taufiq.lostandfound.R
+import id.taufiq.lostandfound.helper.SessionManager
 import kotlinx.android.synthetic.main.fragment_welcome.*
+
 
 class WelcomeFragment : Fragment() {
 
-    companion object {
-        private const val RC_SIGN_IN = 120
-    }
-
-    private lateinit var mAuth: FirebaseAuth
-    private lateinit var googleSignInClient: GoogleSignInClient
+//    companion object {
+//        private const val RC_SIGN_IN = 120
+//    }
+//
+//    private lateinit var googleSignInClient: GoogleSignInClient
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken(getString(R.string.default_web_client_id))
-            .requestEmail()
-            .build()
+//        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+//            .requestIdToken(getString(R.string.default_web_client_id))
+//            .requestEmail()
+//            .build()
+//
+//        googleSignInClient = GoogleSignIn.getClient(requireActivity(), gso)
 
-        googleSignInClient = GoogleSignIn.getClient(requireActivity(), gso)
+        initAction()
+    }
 
-        mAuth = FirebaseAuth.getInstance()
-
+    private fun initAction() {
         btn_create_account.setOnClickListener {
             findNavController().navigate(R.id.action_welcomeFragment_to_registerFragment)
         }
@@ -46,48 +49,50 @@ class WelcomeFragment : Fragment() {
             findNavController().navigate(R.id.action_welcomeFragment_to_loginFragment)
         }
 
-        btn_with_google.setOnClickListener {
-            signIn()
-        }
+//        btn_with_google.setOnClickListener {
+//            signIn()
+//        }
     }
 
-    private fun signIn() {
-        val signInIntent = googleSignInClient.signInIntent
-        startActivityForResult(signInIntent, RC_SIGN_IN)
-    }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
 
-        if (requestCode == RC_SIGN_IN) {
-            val task = GoogleSignIn.getSignedInAccountFromIntent(data)
-            val exception = task.exception
-            if (task.isSuccessful) {
-                try {
-                    val account = task.getResult(ApiException::class.java)!!
-                    Log.d("WelcomeFragment", "firebaseAuthWithGoogle:" + account.id)
-                    firebaseAuthWithGoogle(account.idToken!!)
-                } catch (e: ApiException) {
-                    Log.w("WelcomeFragment", "Google sign in failed", e)
-                }
-            } else {
-                Log.w("WelcomeFragment", exception.toString())
-            }
-        }
-    }
+//    private fun signIn() {
+//        val signInIntent = googleSignInClient.signInIntent
+//        startActivityForResult(signInIntent, RC_SIGN_IN)
+//    }
+//
+//    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+//        super.onActivityResult(requestCode, resultCode, data)
+//
+//        if (requestCode == RC_SIGN_IN) {
+//            val task = GoogleSignIn.getSignedInAccountFromIntent(data)
+//            val exception = task.exception
+//            if (task.isSuccessful) {
+//                try {
+//                    val account = task.getResult(ApiException::class.java)!!
+//                    Log.d("WelcomeFragment", "firebaseAuthWithGoogle:" + account.id)
+////                    firebaseAuthWithGoogle(account.idToken!!)
+//                } catch (e: ApiException) {
+//                    Log.w("WelcomeFragment", "Google sign in failed", e)
+//                }
+//            } else {
+//                Log.w("WelcomeFragment", exception.toString())
+//            }
+//        }
+//    }
 
-    private fun firebaseAuthWithGoogle(idToken: String) {
-        val credential = GoogleAuthProvider.getCredential(idToken, null)
-        mAuth.signInWithCredential(credential)
-            .addOnCompleteListener(requireActivity()) {
-                if (it.isSuccessful) {
-                    Log.d("WelcomeFragment", "signInWithCredential:success")
-                    findNavController().navigate(R.id.action_welcomeFragment_to_homeFragment)
-                } else {
-                    Log.d("WelcomeFragment", "signInWithCredential:failure")
-                }
-            }
-    }
+//    private fun firebaseAuthWithGoogle(idToken: String) {
+//        val credential = GoogleAuthProvider.getCredential(idToken, null)
+//        mAuth.signInWithCredential(credential)
+//            .addOnCompleteListener(requireActivity()) {
+//                if (it.isSuccessful) {
+//                    Log.d("WelcomeFragment", "signInWithCredential:success")
+//                    findNavController().navigate(R.id.action_welcomeFragment_to_homeFragment)
+////                } else {
+////                    Log.d("WelcomeFragment", "signInWithCredential:failure")
+////                }
+////            }
+////    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -99,10 +104,13 @@ class WelcomeFragment : Fragment() {
 
     override fun onStart() {
         super.onStart()
-        val user = mAuth.currentUser
-        if(user != null){
+        cekUser()
+    }
+
+    private fun cekUser() {
+        val sessionManager = SessionManager(requireContext())
+        if(sessionManager.fetchAuthToken()!=null){
             findNavController().navigate(R.id.action_welcomeFragment_to_homeFragment)
         }
     }
-
 }
