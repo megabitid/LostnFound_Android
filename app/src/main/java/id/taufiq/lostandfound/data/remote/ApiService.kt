@@ -1,24 +1,27 @@
 package id.taufiq.lostandfound.data.remote
 
+import id.taufiq.lostandfound.helper.Constants
 import retrofit2.Call
-import retrofit2.http.Body
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
-import retrofit2.http.POST
+import retrofit2.http.*
 
 
-public interface ApiService {
+interface ApiService {
     @FormUrlEncoded
-    @POST("api/v1/android/auth/register")
-    public fun createUser(
+    @POST(Constants.REGISTER_URL)
+    fun createUser(
         @Field("nama") nama: String?,
         @Field("email") email: String?,
         @Field("password") password: String?,
         @Field("image") image: String?
-    ): Call<ResponseRegister?>?
+    ): Call<RegisterResponse>
 
-    @POST("api/v1/android/auth/login")
+    @POST(Constants.LOGIN_URL)
     fun loginUser(
         @Body loginRequest: LoginRequest
-    ):Call<ResponseLogin>
+    ):Call<LoginResponse>
+
+    @GET(Constants.LOGOUT_URL)
+    fun logoutUser(
+        @Header("Authorization") token: String
+    ):Call<LogoutResponse>
 }

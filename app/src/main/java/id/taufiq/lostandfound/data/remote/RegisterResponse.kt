@@ -1,6 +1,6 @@
 package id.taufiq.lostandfound.data.remote
 
-data class ResponseRegister(
+data class RegisterResponse(
 	val image: String? = null,
 	val role: Int? = null,
 	val nama: String? = null,

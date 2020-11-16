@@ -1,17 +1,23 @@
 package id.taufiq.lostandfound.ui.home
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.google.firebase.auth.FirebaseAuth
 import id.taufiq.lostandfound.R
+import id.taufiq.lostandfound.data.remote.ApiClient
+import id.taufiq.lostandfound.data.remote.ApiService
+import id.taufiq.lostandfound.data.remote.LogoutResponse
+import id.taufiq.lostandfound.helper.SessionManager
 import kotlinx.android.synthetic.main.fragment_home.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class HomeFragment : Fragment() {
-    private lateinit var mAuth: FirebaseAuth
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -23,13 +29,35 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initAction()
+    }
 
-        mAuth = FirebaseAuth.getInstance()
-
+    private fun initAction() {
         btn_logout.setOnClickListener {
-            mAuth.signOut()
-                findNavController().navigate(R.id.action_homeFragment_to_welcomeFragment)
-            }
+            logout()
+        }
+    }
+
+    private fun logout() {
+        val sessionManager = SessionManager(requireContext())
+        val apiClient = ApiClient()
+
+        // Pass the token as parameter
+        apiClient.getApiService().logoutUser(token = "Bearer ${sessionManager.fetchAuthToken()}")
+            .enqueue(object : Callback<LogoutResponse> {
+                override fun onResponse(
+                    call: Call<LogoutResponse>,
+                    response: Response<LogoutResponse>
+                ) {
+                    Log.d("message", response.body()?.message.toString())
+                    findNavController().navigate(R.id.action_homeFragment_to_welcomeFragment)
+                }
+
+                override fun onFailure(call: Call<LogoutResponse>, t: Throwable) {
+                    Log.e("Error", t.message.toString())
+                }
+
+            })
     }
 
 }

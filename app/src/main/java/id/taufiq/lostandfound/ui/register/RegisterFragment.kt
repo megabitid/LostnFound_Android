@@ -1,7 +1,6 @@
 package id.taufiq.lostandfound.ui.register
 
 import android.os.Bundle
-import android.util.Log
 import android.util.Patterns
 import android.view.LayoutInflater
 import android.view.View
@@ -11,15 +10,9 @@ import android.widget.CheckBox
 import androidx.core.content.ContextCompat.getColor
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.google.firebase.auth.FirebaseAuth
 import id.taufiq.lostandfound.R
-import id.taufiq.lostandfound.data.remote.ApiClient
-import id.taufiq.lostandfound.data.remote.ResponseRegister
 import kotlinx.android.synthetic.main.fragment_register.*
 import kotlinx.android.synthetic.main.fragment_register.view.*
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 
 @Suppress("LABEL_NAME_CLASH")
