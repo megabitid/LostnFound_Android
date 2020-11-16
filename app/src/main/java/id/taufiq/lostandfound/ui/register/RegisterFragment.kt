@@ -1,6 +1,5 @@
 package id.taufiq.lostandfound.ui.register
 
-import android.content.ContentValues.TAG
 import android.os.Bundle
 import android.util.Log
 import android.util.Patterns
@@ -9,19 +8,23 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.CheckBox
-import android.widget.Toast
 import androidx.core.content.ContextCompat.getColor
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
 import id.taufiq.lostandfound.R
+import id.taufiq.lostandfound.data.remote.ApiClient
+import id.taufiq.lostandfound.data.remote.ResponseRegister
 import kotlinx.android.synthetic.main.fragment_register.*
 import kotlinx.android.synthetic.main.fragment_register.view.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 
 @Suppress("LABEL_NAME_CLASH")
 class RegisterFragment : Fragment() {
-    private lateinit var mAuth: FirebaseAuth
+//    private lateinit var mAuth: FirebaseAuth
     private lateinit var checkBox: CheckBox
     private lateinit var button: Button
 
@@ -38,7 +41,7 @@ class RegisterFragment : Fragment() {
         button = view.findViewById(R.id.btn_create_account)
         checkBox = view.findViewById(R.id.checkbox1)
 
-        mAuth = FirebaseAuth.getInstance()
+//        mAuth = FirebaseAuth.getInstance()
 
         btn_back.setOnClickListener {
             findNavController().navigate(R.id.action_registerFragment_to_welcomeFragment)
@@ -54,31 +57,29 @@ class RegisterFragment : Fragment() {
                    val email = view.text_email.editText?.text.toString().trim()
                    val password = view.text_password.editText?.text.toString().trim()
 
-                   if (name.isEmpty()){
+                   if (name.isEmpty()) {
                        view.text_name.error = "Nama harus diisi!"
                        view.text_name.requestFocus()
                        return@setOnClickListener
                    }
 
-                   if (email.isEmpty()){
+                   if (email.isEmpty()) {
                        view.text_email.error = "Email harus diisi!"
                        view.text_email.requestFocus()
                        return@setOnClickListener
                    }
 
-                   if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+                   if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
                        view.text_email.error = "Email tidak valid!"
                        view.text_email.requestFocus()
                        return@setOnClickListener
                    }
 
-                   if (password.isEmpty() || password.length < 8){
+                   if (password.isEmpty() || password.length < 8) {
                        view.text_password.error = "Password harus lebih dari 8 karakter!"
                        view.text_password.requestFocus()
                        return@setOnClickListener
                    }
-
-                   singupUser(email, password)
                }
            }else{
                button.isEnabled = false
@@ -88,19 +89,19 @@ class RegisterFragment : Fragment() {
         }
     }
 
-    private fun singupUser(email: String, password: String) {
-        mAuth.createUserWithEmailAndPassword(email, password)
-            .addOnCompleteListener(requireActivity()) { task ->
-                if (task.isSuccessful) {
-                    // Sign in success, update UI with the signed-in user's information
-                    Log.d(TAG, "createUserWithEmail:success")
-                    findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
-                } else {
-                    // If sign in fails, display a message to the user.
-                    Log.w(TAG, "createUserWithEmail:failure", task.exception)
-                    Toast.makeText(context, "Authentication failed.",
-                        Toast.LENGTH_SHORT).show()
-                }
-            }
-    }
+//    private fun singupUser(email: String, password: String) {
+//        mAuth.createUserWithEmailAndPassword(email, password)
+//            .addOnCompleteListener(requireActivity()) { task ->
+//                if (task.isSuccessful) {
+//                    // Sign in success, update UI with the signed-in user's information
+//                    Log.d(TAG, "createUserWithEmail:success")
+//                    findNavController().navigate(R.id.action_registerFragment_to_loginFragment)
+//                } else {
+//                    // If sign in fails, display a message to the user.
+//                    Log.w(TAG, "createUserWithEmail:failure", task.exception)
+//                    Toast.makeText(context, "Authentication failed.",
+//                        Toast.LENGTH_SHORT).show()
+//                }
+//            }
+//    }
 }

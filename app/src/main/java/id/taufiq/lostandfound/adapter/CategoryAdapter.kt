@@ -6,10 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import id.taufiq.lostandfound.R
-import id.taufiq.lostandfound.model.local.DataCategory
+import id.taufiq.lostandfound.data.local.model.DataCategory
 import kotlinx.android.synthetic.main.row_item_category.view.*
 import kotlinx.android.synthetic.main.row_item_category.view.iv_category
-import kotlinx.android.synthetic.main.row_item_category2.view.*
 
 
 /**

@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import id.taufiq.lostandfound.R
 import id.taufiq.lostandfound.adapter.CategoryAdapter
 import id.taufiq.lostandfound.helper.showToast
-import id.taufiq.lostandfound.model.local.DataCategory
+import id.taufiq.lostandfound.data.local.model.DataCategory
 import kotlinx.android.synthetic.main.activity_home.*
 
 class HomeActivity : AppCompatActivity() {

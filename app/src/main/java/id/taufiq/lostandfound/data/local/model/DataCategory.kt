@@ -1,4 +1,4 @@
-package id.taufiq.lostandfound.model.local
+package id.taufiq.lostandfound.data.local.model
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
