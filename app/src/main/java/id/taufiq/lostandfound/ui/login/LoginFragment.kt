@@ -87,7 +87,7 @@ class LoginFragment : Fragment() {
         super.onStart()
         val user = mAuth.currentUser
         if(user != null){
-            findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
+            mAuth.signOut()
         }
     }
 }
