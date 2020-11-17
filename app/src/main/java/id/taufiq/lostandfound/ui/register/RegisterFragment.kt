@@ -13,6 +13,7 @@ import androidx.core.content.ContextCompat.getColor
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import id.taufiq.lostandfound.R
+import id.taufiq.lostandfound.data.api.ApiClient
 import id.taufiq.lostandfound.data.remote.*
 import id.taufiq.lostandfound.helper.Constants
 import id.taufiq.lostandfound.helper.SessionManager
@@ -93,34 +94,34 @@ class RegisterFragment : Fragment() {
         val sessionManager = SessionManager(requireContext())
         val apiClient = ApiClient()
 
-        apiClient.getApiService().createUser(name, email, password, image)
-            .enqueue(object : Callback<RegisterResponse> {
-                override fun onResponse(
-                    call: Call<RegisterResponse>,
-                    response: Response<RegisterResponse>
-                ) {
-                    try {
-                        val user = response.body()
-                        if (user != null) {
-                            if(user.email != null)
-                                Log.d("email", user.email.toString())
-                                Log.d("token", user.token.toString())
-                                Toast.makeText(context , "Register Berhasil.", Toast.LENGTH_SHORT).show()
-                                sessionManager.saveAuthToken(user.token.toString())
-                                findNavController().navigate(R.id.action_registerFragment_to_homeFragment)
-                        } else {
-                            Toast.makeText(context , "Email Sudah Terdaftar", Toast.LENGTH_SHORT).show()
-                        }
-                    } catch (exception: Exception){
-                        Log.e("exception", exception.message.toString())
-                    }
-                }
-
-                override fun onFailure(call: Call<RegisterResponse>, t: Throwable) {
-                    Log.e("Error", t.message.toString())
-                    Toast.makeText(context , "Register Gagal.", Toast.LENGTH_SHORT).show()
-                }
-
-            })
+//        apiClient.getApiService().createUser(name, email, password, image)
+//            .enqueue(object : Callback<RegisterResponse> {
+//                override fun onResponse(
+//                    call: Call<RegisterResponse>,
+//                    response: Response<RegisterResponse>
+//                ) {
+//                    try {
+//                        val user = response.body()
+//                        if (user != null) {
+//                            if(user.email != null)
+//                                Log.d("email", user.email.toString())
+//                                Log.d("token", user.token.toString())
+//                                Toast.makeText(context , "Register Berhasil.", Toast.LENGTH_SHORT).show()
+//                                sessionManager.saveAuthToken(user.token.toString())
+//                                findNavController().navigate(R.id.action_registerFragment_to_homeFragment)
+//                        } else {
+//                            Toast.makeText(context , "Email Sudah Terdaftar", Toast.LENGTH_SHORT).show()
+//                        }
+//                    } catch (exception: Exception){
+//                        Log.e("exception", exception.message.toString())
+//                    }
+//                }
+//
+//                override fun onFailure(call: Call<RegisterResponse>, t: Throwable) {
+//                    Log.e("Error", t.message.toString())
+//                    Toast.makeText(context , "Register Gagal.", Toast.LENGTH_SHORT).show()
+//                }
+//
+//            })
     }
 }

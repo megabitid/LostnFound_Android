@@ -1,7 +1,12 @@
-package id.taufiq.lostandfound.data.remote
+package id.taufiq.lostandfound.data.api
 
+import id.taufiq.lostandfound.data.remote.LoginRequest
+import id.taufiq.lostandfound.data.remote.LoginResponse
+import id.taufiq.lostandfound.data.remote.LogoutResponse
+import id.taufiq.lostandfound.data.remote.RegisterResponse
 import id.taufiq.lostandfound.helper.Constants
 import retrofit2.Call
+import retrofit2.Response
 import retrofit2.http.*
 
 
@@ -16,12 +21,12 @@ interface ApiService {
     ): Call<RegisterResponse>
 
     @POST(Constants.LOGIN_URL)
-    fun loginUser(
+    suspend fun loginUser(
         @Body loginRequest: LoginRequest
-    ):Call<LoginResponse>
+    ): Response<LoginResponse>
 
     @GET(Constants.LOGOUT_URL)
-    fun logoutUser(
+    suspend fun logoutUser(
         @Header("Authorization") token: String
-    ):Call<LogoutResponse>
+    ): Response<LogoutResponse>
 }

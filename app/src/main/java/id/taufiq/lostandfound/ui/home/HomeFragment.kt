@@ -5,18 +5,20 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
+import com.mindorks.retrofit.coroutines.utils.Status
 import id.taufiq.lostandfound.R
-import id.taufiq.lostandfound.data.remote.ApiClient
-import id.taufiq.lostandfound.data.remote.LogoutResponse
+import id.taufiq.lostandfound.data.api.ApiClient
+import id.taufiq.lostandfound.data.api.ApiHelper
 import id.taufiq.lostandfound.helper.SessionManager
+import id.taufiq.lostandfound.ui.base.ViewModelFactory
 import kotlinx.android.synthetic.main.fragment_home.*
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class HomeFragment : Fragment() {
+    private lateinit var viewModel: LogoutViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,6 +31,14 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initAction()
+        setupViewModel()
+    }
+
+    private fun setupViewModel() {
+        viewModel = ViewModelProviders.of(
+            this,
+            ViewModelFactory(ApiHelper(ApiClient().getApiService()))
+        ).get(LogoutViewModel::class.java)
     }
 
     private fun initAction() {
@@ -39,29 +49,33 @@ class HomeFragment : Fragment() {
 
     private fun logout() {
         val sessionManager = SessionManager(requireContext())
-        val apiClient = ApiClient()
-
-        // Pass the token as parameter
-        apiClient.getApiService().logoutUser(token = "Bearer ${sessionManager.fetchAuthToken()}")
-            .enqueue(object : Callback<LogoutResponse> {
-                override fun onResponse(
-                    call: Call<LogoutResponse>,
-                    response: Response<LogoutResponse>
-                ) {
-                    if (response.body()?.message.equals("The token has been blacklisted")) {
+        viewModel.logoutUser(token = "Bearer ${sessionManager.fetchAuthToken()}").observe(viewLifecycleOwner, {
+            it?.let { resource ->
+                when (resource.status) {
+                    Status.SUCCESS -> {
                         sessionManager.clearLoggedInToken()
                         findNavController().navigate(R.id.action_homeFragment_to_welcomeFragment)
-                    } else {
-                        Log.d("message", response.body()?.message.toString())
-                        sessionManager.clearLoggedInToken()
-                        findNavController().navigate(R.id.action_homeFragment_to_welcomeFragment)
+                        if (resource.data?.isSuccessful!!){
+                            sessionManager.clearLoggedInToken()
+                            findNavController().navigate(R.id.action_homeFragment_to_welcomeFragment)
+                            Log.d("test", resource.data.body().toString())
+                            Toast.makeText(context , "Logout Berhasil.", Toast.LENGTH_SHORT).show()
+                        } else {
+                            Log.e("test", resource.data.body().toString())
+                            Toast.makeText(context , "Logout Gagal!", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                    Status.ERROR -> {
+//                        progressBar.visibility = View.GONE
+                        Log.e("error", it.message.toString())
+                    }
+                    Status.LOADING -> {
+//                        progressBar.visibility = View.VISIBLE
+//                        recyclerView.visibility = View.GONE
                     }
                 }
+            }
+        })
 
-                override fun onFailure(call: Call<LogoutResponse>, t: Throwable) {
-                    Log.e("Error", t.message.toString())
-                }
-
-            })
     }
 }

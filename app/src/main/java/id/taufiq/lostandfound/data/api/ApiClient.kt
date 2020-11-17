@@ -1,4 +1,4 @@
-package id.taufiq.lostandfound.data.remote
+package id.taufiq.lostandfound.data.api
 
 import id.taufiq.lostandfound.helper.Constants
 import retrofit2.Retrofit

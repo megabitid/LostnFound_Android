@@ -8,19 +8,20 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
+import id.taufiq.lostandfound.ui.base.ViewModelFactory
+import com.mindorks.retrofit.coroutines.utils.Status
 import id.taufiq.lostandfound.R
-import id.taufiq.lostandfound.data.remote.ApiClient
+import id.taufiq.lostandfound.data.api.ApiClient
+import id.taufiq.lostandfound.data.api.ApiHelper
 import id.taufiq.lostandfound.data.remote.LoginRequest
-import id.taufiq.lostandfound.data.remote.LoginResponse
 import id.taufiq.lostandfound.helper.SessionManager
 import kotlinx.android.synthetic.main.fragment_login.*
 import kotlinx.android.synthetic.main.fragment_login.view.*
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class LoginFragment : Fragment() {
+    private lateinit var viewModel: LoginViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,6 +34,14 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initAction()
+        setupViewModel()
+    }
+
+    private fun setupViewModel() {
+        viewModel = ViewModelProviders.of(
+            this,
+            ViewModelFactory(ApiHelper(ApiClient().getApiService()))
+        ).get(LoginViewModel::class.java)
     }
 
     private fun initAction(){
@@ -66,42 +75,40 @@ class LoginFragment : Fragment() {
                 return@setOnClickListener
             }
 
-            loginUser(email, password)
+            setupObservers(email, password)
         }
     }
 
-    private fun loginUser(email : String, password : String){
+    private fun setupObservers(email : String, password : String) {
         val request = LoginRequest()
         request.email = email
         request.password = password
 
-        val sessionManager = SessionManager(requireContext())
-        val apiClient = ApiClient()
-
-        apiClient.getApiService().loginUser(request).enqueue(object : Callback<LoginResponse>{
-            override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
-                try {
-                    val user = response.body()
-                    if (user != null) {
-                        if(user.email != null)
-                            Log.d("email", user.email.toString())
-                            Log.d("token", user.token.toString())
-                            Toast.makeText(context , "Login Berhasil.", Toast.LENGTH_SHORT).show()
-                            sessionManager.saveAuthToken(user.token.toString())
+        viewModel.loginUser(request).observe(viewLifecycleOwner, {
+            it?.let { resource ->
+                when (resource.status) {
+                    Status.SUCCESS -> {
+                        if (resource.data?.isSuccessful!!){
+                            val sessionManager = SessionManager(requireContext())
+                            sessionManager.saveAuthToken(resource.data.body()?.token.toString())
                             findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
-                    } else {
-                        Toast.makeText(context , "Email atau Password salah!", Toast.LENGTH_SHORT).show()
+                            Log.d("test", resource.data.body().toString())
+                            Toast.makeText(context , "Login Berhasil.", Toast.LENGTH_SHORT).show()
+                        } else {
+                            Log.e("test", resource.data.body().toString())
+                            Toast.makeText(context , "Email atau Password salah!", Toast.LENGTH_SHORT).show()
+                        }
                     }
-                } catch (exception: Exception){
-                    Log.e("exception", exception.message.toString())
+                    Status.ERROR -> {
+//                        progressBar.visibility = View.GONE
+                        Log.e("error", it.message.toString())
+                    }
+                    Status.LOADING -> {
+//                        progressBar.visibility = View.VISIBLE
+//                        recyclerView.visibility = View.GONE
+                    }
                 }
             }
-
-            override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
-                Log.e("Error", t.message.toString())
-                Toast.makeText(context , "Login Gagal.", Toast.LENGTH_SHORT).show()
-            }
-
         })
     }
 }
