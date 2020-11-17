@@ -14,8 +14,8 @@ import id.taufiq.lostandfound.R
 import id.taufiq.lostandfound.adapter.CategoryAdapter
 import id.taufiq.lostandfound.adapter.TerbaruAdapter
 import id.taufiq.lostandfound.helper.showToast
-import id.taufiq.lostandfound.model.local.DataCategory
-import id.taufiq.lostandfound.model.local.DataTerbaru
+import id.taufiq.lostandfound.data.local.model.DataCategory
+import id.taufiq.lostandfound.data.local.model.DataTerbaru
 import kotlinx.android.synthetic.main.fragment_home.*
 
 class HomeFragment : Fragment() {

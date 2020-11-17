@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import id.taufiq.lostandfound.R
-import id.taufiq.lostandfound.model.local.DataTerbaru
+import id.taufiq.lostandfound.data.local.model.DataTerbaru
 import kotlinx.android.synthetic.main.row_item_terbaru.view.*
 
 /**
