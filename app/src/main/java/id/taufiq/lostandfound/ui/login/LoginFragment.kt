@@ -10,13 +10,13 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
-import id.taufiq.lostandfound.ui.base.ViewModelFactory
 import com.mindorks.retrofit.coroutines.utils.Status
 import id.taufiq.lostandfound.R
 import id.taufiq.lostandfound.data.api.ApiClient
 import id.taufiq.lostandfound.data.api.ApiHelper
 import id.taufiq.lostandfound.data.remote.LoginRequest
 import id.taufiq.lostandfound.helper.SessionManager
+import id.taufiq.lostandfound.viewmodel.ViewModelFactory
 import kotlinx.android.synthetic.main.fragment_login.*
 import kotlinx.android.synthetic.main.fragment_login.view.*
 
@@ -88,6 +88,7 @@ class LoginFragment : Fragment() {
             it?.let { resource ->
                 when (resource.status) {
                     Status.SUCCESS -> {
+                        progressBar.visibility = View.GONE
                         if (resource.data?.isSuccessful!!){
                             val sessionManager = SessionManager(requireContext())
                             sessionManager.saveAuthToken(resource.data.body()?.token.toString())
@@ -100,12 +101,11 @@ class LoginFragment : Fragment() {
                         }
                     }
                     Status.ERROR -> {
-//                        progressBar.visibility = View.GONE
+                        progressBar.visibility = View.GONE
                         Log.e("error", it.message.toString())
                     }
                     Status.LOADING -> {
-//                        progressBar.visibility = View.VISIBLE
-//                        recyclerView.visibility = View.GONE
+                        progressBar.visibility = View.VISIBLE
                     }
                 }
             }

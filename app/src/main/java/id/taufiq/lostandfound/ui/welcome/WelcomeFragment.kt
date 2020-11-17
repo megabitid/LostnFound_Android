@@ -1,19 +1,12 @@
 package id.taufiq.lostandfound.ui.welcome
 
-import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.auth.api.signin.GoogleSignInClient
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import com.google.android.gms.common.api.ApiException
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.GoogleAuthProvider
 import id.taufiq.lostandfound.R
 import id.taufiq.lostandfound.helper.SessionManager
 import kotlinx.android.synthetic.main.fragment_welcome.*
@@ -25,6 +18,7 @@ class WelcomeFragment : Fragment() {
 //        private const val RC_SIGN_IN = 120
 //    }
 //
+//    private lateinit var mAuth: FirebaseAuth
 //    private lateinit var googleSignInClient: GoogleSignInClient
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -35,6 +29,7 @@ class WelcomeFragment : Fragment() {
 //            .requestEmail()
 //            .build()
 //
+//        mAuth = FirebaseAuth.getInstance()
 //        googleSignInClient = GoogleSignIn.getClient(requireActivity(), gso)
 
         initAction()
@@ -49,18 +44,17 @@ class WelcomeFragment : Fragment() {
             findNavController().navigate(R.id.action_welcomeFragment_to_loginFragment)
         }
 
-//        btn_with_google.setOnClickListener {
+        btn_with_google.setOnClickListener {
 //            signIn()
-//        }
+            Toast.makeText(context , "di click!", Toast.LENGTH_SHORT).show()
+        }
     }
-
-
 
 //    private fun signIn() {
 //        val signInIntent = googleSignInClient.signInIntent
 //        startActivityForResult(signInIntent, RC_SIGN_IN)
 //    }
-//
+
 //    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
 //        super.onActivityResult(requestCode, resultCode, data)
 //
@@ -71,7 +65,7 @@ class WelcomeFragment : Fragment() {
 //                try {
 //                    val account = task.getResult(ApiException::class.java)!!
 //                    Log.d("WelcomeFragment", "firebaseAuthWithGoogle:" + account.id)
-////                    firebaseAuthWithGoogle(account.idToken!!)
+//                    firebaseAuthWithGoogle(account.idToken!!)
 //                } catch (e: ApiException) {
 //                    Log.w("WelcomeFragment", "Google sign in failed", e)
 //                }
@@ -88,11 +82,11 @@ class WelcomeFragment : Fragment() {
 //                if (it.isSuccessful) {
 //                    Log.d("WelcomeFragment", "signInWithCredential:success")
 //                    findNavController().navigate(R.id.action_welcomeFragment_to_homeFragment)
-////                } else {
-////                    Log.d("WelcomeFragment", "signInWithCredential:failure")
-////                }
-////            }
-////    }
+//                } else {
+//                    Log.d("WelcomeFragment", "signInWithCredential:failure")
+//                }
+//            }
+//    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

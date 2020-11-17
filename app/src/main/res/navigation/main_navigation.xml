@@ -72,8 +72,7 @@
         tools:layout="@layout/fragment_home" >
         <action
             android:id="@+id/action_homeFragment_to_welcomeFragment"
-            app:destination="@id/welcomeFragment"
-            app:popUpTo="@id/welcomeFragment" />
+            app:destination="@id/welcomeFragment" />
     </fragment>
 
 </navigation>

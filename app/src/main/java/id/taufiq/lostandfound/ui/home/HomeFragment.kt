@@ -14,7 +14,7 @@ import id.taufiq.lostandfound.R
 import id.taufiq.lostandfound.data.api.ApiClient
 import id.taufiq.lostandfound.data.api.ApiHelper
 import id.taufiq.lostandfound.helper.SessionManager
-import id.taufiq.lostandfound.ui.base.ViewModelFactory
+import id.taufiq.lostandfound.viewmodel.ViewModelFactory
 import kotlinx.android.synthetic.main.fragment_home.*
 
 class HomeFragment : Fragment() {
@@ -53,8 +53,7 @@ class HomeFragment : Fragment() {
             it?.let { resource ->
                 when (resource.status) {
                     Status.SUCCESS -> {
-                        sessionManager.clearLoggedInToken()
-                        findNavController().navigate(R.id.action_homeFragment_to_welcomeFragment)
+                        progressBar.visibility = View.GONE
                         if (resource.data?.isSuccessful!!){
                             sessionManager.clearLoggedInToken()
                             findNavController().navigate(R.id.action_homeFragment_to_welcomeFragment)
@@ -66,16 +65,14 @@ class HomeFragment : Fragment() {
                         }
                     }
                     Status.ERROR -> {
-//                        progressBar.visibility = View.GONE
+                        progressBar.visibility = View.GONE
                         Log.e("error", it.message.toString())
                     }
                     Status.LOADING -> {
-//                        progressBar.visibility = View.VISIBLE
-//                        recyclerView.visibility = View.GONE
+                        progressBar.visibility = View.VISIBLE
                     }
                 }
             }
         })
-
     }
 }
