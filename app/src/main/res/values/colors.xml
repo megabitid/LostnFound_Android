@@ -12,5 +12,6 @@
     <color name="black_color">#212121</color>
     <color name="grey_color_paragraf">#7D7D7D</color>
     <color name="date_color">#AAAAAA</color>
+    <color name="white">#fff</color>
 
 </resources>
