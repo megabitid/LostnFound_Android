@@ -29,9 +29,7 @@ interface ApiService {
 
     @GET(SING_UP_GOOGLE_URL)
     suspend fun singUpGoogle(
-        @Field("email") email: String?,
-        @Field("googleAuthCode") googleAuthCode: String?,
-        @Field("fullName") fullName: String?,
+        @Query("code") code: String?,
     ): Response<SingUpGoogleResponse>
 
     @GET(LOGOUT_URL)

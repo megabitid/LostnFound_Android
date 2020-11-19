@@ -12,7 +12,7 @@ object Constants {
     const val LOGIN_URL = "api/v1/android/auth/login"
     const val LOGOUT_URL = "api/v1/android/auth/logout"
     const val LIST_USER_URL = "api/v1/android/users/"
-    const val SING_UP_GOOGLE_URL = "auth/oauth2/google"
+    const val SING_UP_GOOGLE_URL = "api/v1/android/auth/oauth2/google/authorize"
 
     //Sing_Up_Google
     const val RC_SIGN_IN = 120
