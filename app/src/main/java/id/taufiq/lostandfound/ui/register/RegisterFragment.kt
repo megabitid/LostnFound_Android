@@ -16,7 +16,7 @@ import androidx.navigation.fragment.findNavController
 import id.taufiq.lostandfound.R
 import id.taufiq.lostandfound.data.api.ApiClient
 import id.taufiq.lostandfound.data.api.ApiHelper
-import id.taufiq.lostandfound.helper.Constants
+import id.taufiq.lostandfound.helper.Constants.IMG_DEFAULT
 import id.taufiq.lostandfound.helper.SessionManager
 import id.taufiq.lostandfound.helper.Status
 import id.taufiq.lostandfound.viewmodel.ViewModelFactory
@@ -105,7 +105,7 @@ class RegisterFragment : Fragment() {
     }
 
     private fun createUser(nama : String, email: String, password: String){
-        viewModel.createUser(nama, email, password, Constants.IMG_DEFAULT).observe(viewLifecycleOwner, {
+        viewModel.createUser(nama, email, password, IMG_DEFAULT).observe(viewLifecycleOwner, {
             it?.let { resource ->
                 when (resource.status) {
                     Status.SUCCESS -> {

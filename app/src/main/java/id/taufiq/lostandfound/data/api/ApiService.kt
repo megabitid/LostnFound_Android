@@ -1,10 +1,10 @@
 package id.taufiq.lostandfound.data.api
 
-import id.taufiq.lostandfound.data.remote.LoginRequest
-import id.taufiq.lostandfound.data.remote.LoginResponse
-import id.taufiq.lostandfound.data.remote.LogoutResponse
-import id.taufiq.lostandfound.data.remote.RegisterResponse
-import id.taufiq.lostandfound.helper.Constants
+import id.taufiq.lostandfound.data.remote.*
+import id.taufiq.lostandfound.helper.Constants.LOGIN_URL
+import id.taufiq.lostandfound.helper.Constants.LOGOUT_URL
+import id.taufiq.lostandfound.helper.Constants.REGISTER_URL
+import id.taufiq.lostandfound.helper.Constants.SING_UP_GOOGLE_URL
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -14,7 +14,7 @@ import retrofit2.http.*
  */
 interface ApiService {
     @FormUrlEncoded
-    @POST(Constants.REGISTER_URL)
+    @POST(REGISTER_URL)
     suspend fun createUser(
         @Field("nama") nama: String?,
         @Field("email") email: String?,
@@ -22,12 +22,19 @@ interface ApiService {
         @Field("image") image: String?
     ): Response<RegisterResponse>
 
-    @POST(Constants.LOGIN_URL)
+    @POST(LOGIN_URL)
     suspend fun loginUser(
         @Body loginRequest: LoginRequest
     ): Response<LoginResponse>
 
-    @GET(Constants.LOGOUT_URL)
+    @GET(SING_UP_GOOGLE_URL)
+    suspend fun singUpGoogle(
+        @Field("email") email: String?,
+        @Field("googleAuthCode") googleAuthCode: String?,
+        @Field("fullName") fullName: String?,
+    ): Response<SingUpGoogleResponse>
+
+    @GET(LOGOUT_URL)
     suspend fun logoutUser(
         @Header("Authorization") token: String
     ): Response<LogoutResponse>
