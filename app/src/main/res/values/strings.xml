@@ -35,4 +35,9 @@
     <string name="lorem_ipsum">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</string>
     <string name="item_barang_hilang">item barang hilang</string>
     <string name="status_barang">status barang</string>
+    <string name="send_it_again_r">send_it_again_r</string>
+    <string name="did_n_get_the_code">did_n_get_the_code</string>
+    <string name="enter_the_one_time_password_sent_to">enter_the_one_time_password_sent_to</string>
+    <string name="verify_your_number">verify_your_number</string>
+    <string name="unhandled_error">Unhandled Error</string>
 </resources>

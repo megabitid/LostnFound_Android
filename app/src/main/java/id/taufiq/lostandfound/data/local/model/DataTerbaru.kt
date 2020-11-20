@@ -1,4 +1,4 @@
-package id.taufiq.lostandfound.model.local
+package id.taufiq.lostandfound.data.local.model
 
 /**
  * Created By Taufiq on 11/11/2020.
