@@ -38,7 +38,6 @@ class WelcomeFragment : Fragment() {
         // profile. ID and basic profile are included in DEFAULT_SIGN_IN.
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestServerAuthCode(CLIENT_ID)
-            .requestIdToken(CLIENT_ID)
             .requestEmail()
             .build()
 
@@ -80,7 +79,7 @@ class WelcomeFragment : Fragment() {
             try {
                 val authCode = account.serverAuthCode
                 if (authCode != null) {
-//                    authenticate(authCode)
+                    authenticate(authCode)
                     Log.e(TAG, "update Ui")
                 }
             } catch (e: Exception) {
@@ -96,22 +95,14 @@ class WelcomeFragment : Fragment() {
                 when (resource.status) {
                     Status.SUCCESS -> {
                         progressBar.visibility = View.GONE
-                        val sessionManager = SessionManager(requireActivity())
-                            sessionManager.saveAuthToken(resource.data?.body()?.token.toString())
+                        if (resource.data?.isSuccessful!!) {
+                            val sessionManager = SessionManager(requireActivity())
+                            sessionManager.saveAuthToken(resource.data.body()?.token.toString())
                             findNavController().navigate(R.id.action_welcomeFragment_to_homeFragment)
-                            Log.e("test", resource.data?.body().toString())
-                            Toast.makeText(context, "Login Berhasil.", Toast.LENGTH_SHORT).show()
-
-//                        if (resource.data?.isSuccessful!!) {
-//                            val sessionManager = SessionManager(requireActivity())
-//                            sessionManager.saveAuthToken(resource.data.body()?.token.toString())
-//                            findNavController().navigate(R.id.action_welcomeFragment_to_homeFragment)
-//                            Log.d("test", resource.data.body().toString())
-//                            Toast.makeText(context, "Reister Berhasil.", Toast.LENGTH_SHORT).show()
-//                        } else {
-//                            Log.e("test", resource.data.body().toString())
-//                            Toast.makeText(context, "Email sudah ada!", Toast.LENGTH_SHORT).show()
-//                        }
+                            Log.d("test : ", resource.data.body().toString())
+                        } else {
+                            Log.e("test : ","Berhasil Logout!")
+                        }
                     }
                     Status.ERROR -> {
                         progressBar.visibility = View.GONE
@@ -137,7 +128,6 @@ class WelcomeFragment : Fragment() {
                     Log.d("WelcomeFragment", "displayName :" + account.displayName)
                     Log.d("WelcomeFragment", "email :" + account.email)
                     Log.d("WelcomeFragment", "serverAuthCode :" + account.serverAuthCode)
-                    Log.d("WelcomeFragment", "idToken :" + account.idToken)
                     updateUI(account)
                 } catch (e: ApiException) {
                     Log.w(TAG, "signInResult:failed code=" + e.statusCode)
