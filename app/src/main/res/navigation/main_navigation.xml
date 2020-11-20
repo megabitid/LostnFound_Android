@@ -104,6 +104,22 @@
             android:id="@+id/action_detailHome_to_homeFragment"
             app:destination="@id/homeFragment"
             app:popUpTo="@id/homeFragment" />
+        <action
+            android:id="@+id/action_detailHome_to_verifikasiFragment"
+            app:destination="@id/verifikasiFragment" />
+        <argument
+            android:name="TerbaruData"
+            app:argType="id.taufiq.lostandfound.model.local.DataTerbaru" />
+    </fragment>
+    <fragment
+        android:id="@+id/verifikasiFragment"
+        android:name="id.taufiq.lostandfound.VerifikasiFragment"
+        android:label="fragment_verifikasi"
+        tools:layout="@layout/fragment_verifikasi" >
+        <action
+            android:id="@+id/action_verifikasiFragment_to_detailHome"
+            app:destination="@id/detailHome"
+            app:popUpToInclusive="true" />
     </fragment>
 
 </navigation>

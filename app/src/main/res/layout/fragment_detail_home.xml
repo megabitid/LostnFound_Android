@@ -21,7 +21,7 @@
     <View
         android:id="@+id/view"
         android:layout_width="wrap_content"
-        android:layout_height="500"
+        android:layout_height="500dp"
         android:background="@drawable/bg_bottom_nav"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -77,14 +77,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/imageView3"
         app:layout_constraintTop_toTopOf="@+id/imageView3"
-        tools:text="Stasiun Maros" />
+        android:text="Stasiun Maros" />
 
     <ImageView
         android:id="@+id/imageView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:src="@drawable/ic_image_ketemu"
+        tools:src="@drawable/ic_image_ketemu"
         app:layout_constraintEnd_toEndOf="@+id/tv_stasiun_loc"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/imageView3"
@@ -196,7 +196,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView14" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btn_claim"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"

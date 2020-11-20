@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -61,7 +62,7 @@ class HomeFragment : Fragment() {
             LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         rv_category.adapter = context?.let {
             CategoryAdapter(it, data) {
-                context?.showToast("clicked ${it.title}")
+
             }
         }
     }
@@ -69,10 +70,9 @@ class HomeFragment : Fragment() {
     private fun initListTerbaru() {
         rv_terbaru.layoutManager = GridLayoutManager(context, 2)
         rv_terbaru.adapter = context?.let {
-            TerbaruAdapter(it, dataTerbaru) {
-
-
-
+            TerbaruAdapter(it, dataTerbaru) { terbaru ->
+                val todetail = HomeFragmentDirections.actionHomeFragmentToDetailHome(terbaru)
+                findNavController().navigate(todetail)
             }
         }
     }
