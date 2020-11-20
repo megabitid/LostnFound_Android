@@ -13,5 +13,7 @@
     <color name="grey_color_paragraf">#7D7D7D</color>
     <color name="date_color">#AAAAAA</color>
     <color name="white">#fff</color>
+    <color name="border_color">#E4E4E4</color>
+
 
 </resources>
