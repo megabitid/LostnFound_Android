@@ -8,7 +8,7 @@ import com.google.gson.annotations.SerializedName
  *
  */
 
-data class RegisterRequest (
+data class UserRequest (
     @SerializedName("nama")
     @Expose
     var nama: String? = null,

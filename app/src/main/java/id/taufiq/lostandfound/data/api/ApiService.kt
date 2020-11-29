@@ -4,7 +4,7 @@ import id.taufiq.lostandfound.data.remote.*
 import id.taufiq.lostandfound.helper.Constants.LOGIN_URL
 import id.taufiq.lostandfound.helper.Constants.LOGOUT_URL
 import id.taufiq.lostandfound.helper.Constants.REGISTER_URL
-import id.taufiq.lostandfound.helper.Constants.SING_UP_GOOGLE_URL
+import id.taufiq.lostandfound.helper.Constants.LOGIN_GOOGLE_URL
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -20,17 +20,17 @@ interface ApiService {
         @Field("email") email: String?,
         @Field("password") password: String?,
         @Field("image") image: String?
-    ): Response<RegisterResponse>
+    ): Response<UserResponse>
 
     @POST(LOGIN_URL)
     suspend fun loginUser(
         @Body loginRequest: LoginRequest
-    ): Response<LoginResponse>
+    ): Response<UserResponse>
 
-    @GET(SING_UP_GOOGLE_URL)
-    suspend fun singUpGoogle(
+    @GET(LOGIN_GOOGLE_URL)
+    suspend fun loginGoogle(
         @Query("code") code: String?,
-    ): Response<SingUpGoogleResponse>
+    ): Response<UserResponse>
 
     @GET(LOGOUT_URL)
     suspend fun logoutUser(

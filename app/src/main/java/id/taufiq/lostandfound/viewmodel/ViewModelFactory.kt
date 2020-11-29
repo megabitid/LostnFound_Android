@@ -7,7 +7,7 @@ import id.taufiq.lostandfound.data.repository.MainRepository
 import id.taufiq.lostandfound.ui.akun.LogoutViewModel
 import id.taufiq.lostandfound.ui.login.LoginViewModel
 import id.taufiq.lostandfound.ui.register.RegisterViewModel
-import id.taufiq.lostandfound.ui.welcome.SingUpGoogleViewModel
+import id.taufiq.lostandfound.ui.welcome.LoginGoogleViewModel
 
 /**
  * Created By Gogxi on 17/11/2020.
@@ -24,8 +24,8 @@ class ViewModelFactory(private val apiHelper: ApiHelper) : ViewModelProvider.Fac
             return LogoutViewModel(MainRepository(apiHelper)) as T
         } else if (modelClass.isAssignableFrom(RegisterViewModel::class.java)){
             return RegisterViewModel(MainRepository(apiHelper)) as T
-        } else if (modelClass.isAssignableFrom(SingUpGoogleViewModel::class.java)){
-            return SingUpGoogleViewModel(MainRepository(apiHelper)) as T
+        } else if (modelClass.isAssignableFrom(LoginGoogleViewModel::class.java)){
+            return LoginGoogleViewModel(MainRepository(apiHelper)) as T
         }
         throw IllegalArgumentException("Unknown class name")
     }

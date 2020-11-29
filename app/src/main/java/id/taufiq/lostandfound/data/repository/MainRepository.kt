@@ -12,7 +12,7 @@ class MainRepository(private val apiHelper: ApiHelper) {
 
     suspend fun createUser(nama : String, email: String, password: String, image: String) = apiHelper.createUser(nama, email, password, image)
 
-    suspend fun singUpGoogle(code : String) = apiHelper.singUpGoogle(code)
+    suspend fun loginGoogle(code : String) = apiHelper.loginGoogle(code)
 
     suspend fun loginUser(loginRequest: LoginRequest) = apiHelper.loginUser(loginRequest)
 

@@ -29,7 +29,7 @@ import kotlinx.android.synthetic.main.fragment_welcome.*
 
 class WelcomeFragment : Fragment() {
     private lateinit var mGoogleSignInClient: GoogleSignInClient
-    private lateinit var viewModel: SingUpGoogleViewModel
+    private lateinit var viewModel: LoginGoogleViewModel
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -52,7 +52,7 @@ class WelcomeFragment : Fragment() {
         viewModel = ViewModelProviders.of(
             this,
             ViewModelFactory(ApiHelper(ApiClient().getApiService()))
-        ).get(SingUpGoogleViewModel::class.java)
+        ).get(LoginGoogleViewModel::class.java)
     }
 
     private fun initAction() {
@@ -90,7 +90,7 @@ class WelcomeFragment : Fragment() {
     }
 
     private fun authenticate(googleAuthCode: String){
-        viewModel.singUpGoogle(googleAuthCode).observe(viewLifecycleOwner, {
+        viewModel.loginGoogle(googleAuthCode).observe(viewLifecycleOwner, {
             it?.let { resource ->
                 when (resource.status) {
                     Status.SUCCESS -> {

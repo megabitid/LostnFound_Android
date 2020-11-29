@@ -10,7 +10,7 @@ class ApiHelper (private val apiService: ApiService) {
 
     suspend fun createUser(nama : String, email: String, password: String, image: String) = apiService.createUser(nama, email, password, image)
 
-    suspend fun singUpGoogle(code : String) = apiService.singUpGoogle(code)
+    suspend fun loginGoogle(code : String) = apiService.loginGoogle(code)
 
     suspend fun loginUser(loginRequest: LoginRequest) = apiService.loginUser(loginRequest)
 

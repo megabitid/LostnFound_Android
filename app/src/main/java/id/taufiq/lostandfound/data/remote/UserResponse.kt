@@ -7,8 +7,7 @@ import com.google.gson.annotations.SerializedName
  * Created By Gogxi on 17/11/2020.
  *
  */
-
-data class RegisterResponse(
+data class UserResponse(
     @SerializedName("image")
     @Expose
     val image: String? = null,
@@ -17,9 +16,13 @@ data class RegisterResponse(
     @Expose
     val role: Int? = null,
 
-    @SerializedName("nama")
+    @SerializedName("name")
     @Expose
     val nama: String? = null,
+
+    @SerializedName("nip")
+    @Expose
+    val nip: Any? = null,
 
     @SerializedName("updatedAt")
     @Expose
@@ -28,6 +31,10 @@ data class RegisterResponse(
     @SerializedName("createdAt")
     @Expose
     val createdAt: String? = null,
+
+    @SerializedName("emailVerifiedAt")
+    @Expose
+    val emailVerifiedAt: Any? = null,
 
     @SerializedName("id")
     @Expose
