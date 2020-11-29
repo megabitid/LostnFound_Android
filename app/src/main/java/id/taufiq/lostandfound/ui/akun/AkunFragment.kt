@@ -8,7 +8,9 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.setupWithNavController
 import id.taufiq.lostandfound.R
 import id.taufiq.lostandfound.data.api.ApiClient
 import id.taufiq.lostandfound.data.api.ApiHelper
@@ -16,6 +18,7 @@ import id.taufiq.lostandfound.helper.SessionManager
 import id.taufiq.lostandfound.helper.Status
 import id.taufiq.lostandfound.viewmodel.ViewModelFactory
 import kotlinx.android.synthetic.main.fragment_akun.*
+import kotlinx.android.synthetic.main.fragment_akun.bottom_nav_id
 
 class AkunFragment : Fragment() {
     private lateinit var viewModel: LogoutViewModel
@@ -32,6 +35,16 @@ class AkunFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         initAction()
         setupViewModel()
+
+        // Nav host fragment
+        val host: NavHostFragment = activity?.supportFragmentManager
+            ?.findFragmentById(R.id.container) as NavHostFragment?
+            ?: return
+        // nav controller
+        val navController = host.navController
+
+        // Setup bottom navigation view
+        bottom_nav_id?.setupWithNavController(navController)
     }
 
     private fun setupViewModel() {
