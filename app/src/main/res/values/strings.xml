@@ -45,4 +45,5 @@
     <string name="email">email</string>
     <string name="name">name</string>
     <string name="image">image</string>
+    <string name="change">Edit Profile</string>
 </resources>
