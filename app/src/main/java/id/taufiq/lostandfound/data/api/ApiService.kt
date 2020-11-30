@@ -1,6 +1,7 @@
 package id.taufiq.lostandfound.data.api
 
 import id.taufiq.lostandfound.data.remote.*
+import id.taufiq.lostandfound.helper.Constants.USER_URL
 import id.taufiq.lostandfound.helper.Constants.LOGIN_URL
 import id.taufiq.lostandfound.helper.Constants.LOGOUT_URL
 import id.taufiq.lostandfound.helper.Constants.REGISTER_URL
@@ -36,4 +37,17 @@ interface ApiService {
     suspend fun logoutUser(
         @Header("Authorization") token: String
     ): Response<LogoutResponse>
+
+    @GET(USER_URL)
+    suspend fun getDetailUser(
+        @Header("Authorization") token: String,
+        @Path("id") id : Int
+    ): Response<UserResponse>
+
+    @PUT(USER_URL)
+    suspend fun updateDetailUser(
+        @Header("Authorization") token: String,
+        @Path("id") id : Int,
+        @Body userRequest: UserRequest
+    ): Response<UserResponse>
 }

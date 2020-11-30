@@ -73,6 +73,7 @@
 
             <ImageView
                 android:id="@+id/img_profil"
+                android:visibility="gone"
                 android:layout_width="80dp"
                 android:layout_height="80dp"
                 android:layout_marginTop="17dp"
@@ -84,6 +85,7 @@
 
             <TextView
                 android:id="@+id/text_name"
+                android:visibility="gone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/nunito_sans"
@@ -98,6 +100,7 @@
 
             <TextView
                 android:id="@+id/text_email"
+                android:visibility="gone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
@@ -136,6 +139,7 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/input_email"
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:layout_marginStart="24dp"
@@ -163,6 +167,7 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/input_password"
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:layout_marginTop="16dp"
@@ -208,6 +213,7 @@
 
             <Button
                 android:id="@+id/btn_logout"
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="82dp"

@@ -2,25 +2,34 @@ package id.taufiq.lostandfound.ui.akun
 
 import android.os.Bundle
 import android.util.Log
-import android.view.*
+import android.util.Patterns
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.Toast
-import androidx.appcompat.widget.Toolbar
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
+import coil.load
+import coil.transform.CircleCropTransformation
 import id.taufiq.lostandfound.R
 import id.taufiq.lostandfound.data.api.ApiClient
 import id.taufiq.lostandfound.data.api.ApiHelper
+import id.taufiq.lostandfound.data.remote.UserRequest
+import id.taufiq.lostandfound.helper.Constants.IMG_DEFAULT
 import id.taufiq.lostandfound.helper.SessionManager
 import id.taufiq.lostandfound.helper.Status
 import id.taufiq.lostandfound.viewmodel.ViewModelFactory
 import kotlinx.android.synthetic.main.fragment_akun.*
+import kotlinx.android.synthetic.main.fragment_akun.view.*
 
 
 class AkunFragment : Fragment() {
     private lateinit var viewModel: LogoutViewModel
+    private lateinit var detailViewModel: DetailViewModel
+    private lateinit var updateDetailViewModel: UpdateDetailViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,15 +43,7 @@ class AkunFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         initAction()
         setupViewModel()
-
-//        val toolbar : Toolbar = view.findViewById(R.id.toolbar)
-//////        toolbar.inflateMenu(R.menu.profile_menu)
-//        toolbar.setOnMenuItemClickListener {
-//            onOptionsItemSelected(it)
-//        }
-//
-//        isEdit = false
-//        edit()
+        getDetailUser()
 
         // Nav host fragment
         val host: NavHostFragment = activity?.supportFragmentManager
@@ -60,6 +61,16 @@ class AkunFragment : Fragment() {
             this,
             ViewModelFactory(ApiHelper(ApiClient().getApiService()))
         ).get(LogoutViewModel::class.java)
+
+        detailViewModel = ViewModelProviders.of(
+            this,
+            ViewModelFactory(ApiHelper(ApiClient().getApiService()))
+        ).get(DetailViewModel::class.java)
+
+        updateDetailViewModel = ViewModelProviders.of(
+            this,
+            ViewModelFactory(ApiHelper(ApiClient().getApiService()))
+        ).get(UpdateDetailViewModel::class.java)
     }
 
     private fun initAction() {
@@ -73,6 +84,8 @@ class AkunFragment : Fragment() {
 
         toolbar.setNavigationOnClickListener {
             Toast.makeText(activity, "Click !", Toast.LENGTH_SHORT).show()
+            input_email.isEnabled = false
+            input_password.isEnabled = false
             btn_apply.visibility = View.GONE
             btn_edit.visibility = View.VISIBLE
             visible()
@@ -87,96 +100,37 @@ class AkunFragment : Fragment() {
 
         btn_apply.setOnClickListener {
             Toast.makeText(activity, "Apply profile", Toast.LENGTH_SHORT).show()
+            apply()
         }
     }
 
+    private fun apply() {
+        val name = view?.input_name?.editText?.text.toString().trim()
+        val email = view?.input_email?.editText?.text.toString().trim()
+        val password = view?.input_password?.editText?.text.toString().trim()
 
+        if (name.isEmpty()){
+            view?.input_email?.error = "Nama harus diisi!"
+            view?.input_email?.requestFocus()
+        }
 
+        if (email.isEmpty()){
+            view?.input_email?.error = "Email harus diisi!"
+            view?.input_email?.requestFocus()
+        }
 
+        if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+            view?.input_email?.error = "Email tidak valid!"
+            view?.input_email?.requestFocus()
+        }
 
+        if (password.isEmpty() || password.length < 8){
+            view?.input_password?.error = "Password tidak valid!"
+            view?.input_password?.requestFocus()
+        }
 
-
-//    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-//        inflater.inflate(R.menu.profile_menu, menu)
-//        super.onCreateOptionsMenu(menu, inflater)
-//    }
-//
-//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-//        // Handle action bar item clicks here.
-//        val id = item.itemId
-//
-//        if (id == R.id.edit) {
-//            Toast.makeText(activity , "Item One Clicked", Toast.LENGTH_LONG).show()
-//            id == R.id.apply
-//            item.isVisible = false
-//            return true
-//        }
-//        if (id == R.id.apply) {
-//            Toast.makeText(activity , "Item Two Clicked", Toast.LENGTH_LONG).show()
-//            return true
-//        }
-//
-//        return super.onOptionsItemSelected(item)
-//    }
-
-//    private fun manageMenuOption(view: View) {
-//        if (isEdit) {
-//            isEdit = true
-//            activity?.invalidateOptionsMenu()
-//        } else {
-//            isEdit = false
-//            activity?.invalidateOptionsMenu()
-//        }
-//    }
-//
-//    override fun onPrepareOptionsMenu(menu: Menu) {
-//        if (isEdit){
-//            if (menu.findItem(tes)==null) {
-//                val menuItem : MenuItem = menu.add(Menu.NONE, tes, 5, "Share")
-//                menuItem.setIcon(R.drawable.ic_edit)
-//                menuItem.setShowAsActionFlags(MenuItem.SHOW_AS_ACTION_ALWAYS)
-//
-//                menuItem.setOnMenuItemClickListener(fun(it: MenuItem): Boolean {
-////                    when (it.itemId) {
-////                        R.id.MenuMoreAbout -> {
-////                            requireActivity().openActivity<UIAbout>()
-////                        }
-////                    }
-//
-//                    Toast.makeText(activity , "APALAHHHHHH !!!!", Toast.LENGTH_LONG).show()
-//                    return true
-//                })
-//            }
-//        } else {
-//            menu.removeItem(tes)
-//        }
-//
-//        super.onPrepareOptionsMenu(menu)
-//    }
-
-//    private fun edit() {
-//        if (isEdit) {
-//            actionBarTitle = getString(R.string.change)
-//            toolbar.title = actionBarTitle
-//            toolbar.setNavigationIcon(R.drawable.ic_cancel)
-//            toolbar.inflateMenu(R.menu.profile_menu_apply)
-//            btn_logout.visibility = View.GONE
-//            text_name.visibility = View.GONE
-//            text_email.visibility = View.GONE
-//            btn_edit_foto.visibility = View.VISIBLE
-//            input_name.visibility = View.VISIBLE
-//            isEdit = false
-//            if (!isEdit){
-//                toolbar.setNavigationOnClickListener {
-//                    myMenu?.findItem(R.id.apply)?.isVisible = false
-//                    visible()
-//                }
-//            }
-//        } else {
-//            myMenu?.findItem(R.id.apply)?.isVisible = false
-//            visible()
-//        }
-//    }
+        updateDetailUser(name, email, password)
+    }
 
     private fun visible() {
         toolbar.title = getString(R.string.akun)
@@ -184,8 +138,11 @@ class AkunFragment : Fragment() {
         btn_logout.visibility = View.VISIBLE
         text_name.visibility = View.VISIBLE
         text_email.visibility = View.VISIBLE
-        btn_edit_foto.visibility = View.GONE
+        img_profil.visibility = View.VISIBLE
+        input_email.visibility = View.VISIBLE
+        input_password.visibility = View.VISIBLE
         input_name.visibility = View.GONE
+        btn_edit_foto.visibility = View.GONE
     }
 
     private fun inVisible() {
@@ -196,25 +153,110 @@ class AkunFragment : Fragment() {
         text_email.visibility = View.GONE
         btn_edit_foto.visibility = View.VISIBLE
         input_name.visibility = View.VISIBLE
+        input_email.isEnabled = true
+        input_password.isEnabled = true
     }
 
-//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-//        if (item.itemId == R.id.edit) {
-//            Toast.makeText(activity, "EDIT", Toast.LENGTH_SHORT).show()
-//            Log.e("TAG", "klik")
-//            item.isVisible = false
-//            isEdit = true
-//            edit()
-//        } else if (item.itemId == R.id.apply) {
-//            Toast.makeText(activity, "Apply", Toast.LENGTH_SHORT).show()
-//            Log.e("TAG", "klik")
-////            item.isVisible = false
-////            isEdit = false
-//        }
-//
-//        return super.onOptionsItemSelected(item)
-//    }
+    private fun getDetailUser() {
+        val sessionManager = SessionManager(requireContext())
+        val id = sessionManager.fetchUserId()
+        if (id != null) {
+            detailViewModel.getDetailUser(token = "Bearer ${sessionManager.fetchAuthToken()}", id).observe(
+                viewLifecycleOwner,
+                {
+                    it?.let { resource ->
+                        when (resource.status) {
+                            Status.SUCCESS -> {
+                                progressBar.visibility = View.GONE
+                                if (resource.data?.isSuccessful!!) {
+                                    visible()
 
+                                    img_profil.load(resource.data.body()?.image) {
+                                        crossfade(true)
+                                        placeholder(R.drawable.ic_cancel)
+                                        transformations(CircleCropTransformation())
+                                    }
+
+                                    text_name.text = resource.data.body()?.nama.toString()
+                                    text_email.text = resource.data.body()?.email.toString()
+
+                                    input_email.isEnabled = false
+                                    input_password.isEnabled = false
+
+                                    Log.d("test", resource.data.body().toString())
+                                } else {
+                                    Log.e("test", resource.data.body().toString())
+                                    Toast.makeText(context, "Load data Gagal!", Toast.LENGTH_SHORT).show()
+                                }
+                            }
+                            Status.ERROR -> {
+                                progressBar.visibility = View.GONE
+                                Log.e("error", it.message.toString())
+                            }
+                            Status.LOADING -> {
+                                progressBar.visibility = View.VISIBLE
+                            }
+                        }
+                    }
+                }
+            )
+        }
+    }
+
+    private fun updateDetailUser(name : String, email : String, password : String) {
+        val sessionManager = SessionManager(requireContext())
+        val id = sessionManager.fetchUserId()
+        val request = UserRequest()
+        request.nama = name
+        request.email = email
+        request.password = password
+        request.image = IMG_DEFAULT
+
+        if (id != null) {
+            updateDetailViewModel.updateDetailUser(token = "Bearer ${sessionManager.fetchAuthToken()}", id, request).observe(
+                viewLifecycleOwner,
+                {
+                    it?.let { resource ->
+                        when (resource.status) {
+                            Status.SUCCESS -> {
+                                progressBar.visibility = View.GONE
+                                if (resource.data?.isSuccessful!!) {
+                                    visible()
+
+                                    img_profil.load(resource.data.body()?.image) {
+                                        crossfade(true)
+                                        placeholder(R.drawable.ic_cancel)
+                                        transformations(CircleCropTransformation())
+                                    }
+
+                                    text_name.text = resource.data.body()?.nama.toString()
+                                    text_email.text = resource.data.body()?.email.toString()
+
+                                    input_email.isEnabled = false
+                                    input_password.isEnabled = false
+
+                                    btn_apply.visibility = View.GONE
+                                    btn_edit.visibility = View.VISIBLE
+
+                                    Log.d("test", resource.data.body().toString())
+                                } else {
+                                    Log.e("test", resource.data.body().toString())
+                                    Toast.makeText(context, "update data Gagal!", Toast.LENGTH_SHORT).show()
+                                }
+                            }
+                            Status.ERROR -> {
+                                progressBar.visibility = View.GONE
+                                Log.e("error", it.message.toString())
+                            }
+                            Status.LOADING -> {
+                                progressBar.visibility = View.VISIBLE
+                            }
+                        }
+                    }
+                }
+            )
+        }
+    }
 
     private fun logout() {
         val sessionManager = SessionManager(requireContext())

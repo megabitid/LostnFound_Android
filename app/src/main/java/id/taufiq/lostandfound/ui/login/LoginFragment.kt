@@ -93,6 +93,7 @@ class LoginFragment : Fragment() {
                         if (resource.data?.isSuccessful!!){
                             val sessionManager = SessionManager(requireContext())
                             sessionManager.saveAuthToken(resource.data.body()?.token.toString())
+                            resource.data.body()?.id?.let { it1 -> sessionManager.saveUserId(it1) }
                             findNavController().navigate(R.id.action_loginFragment_to_homeFragment)
                             Log.d("test", resource.data.body().toString())
                             Toast.makeText(context , "Login Berhasil.", Toast.LENGTH_SHORT).show()

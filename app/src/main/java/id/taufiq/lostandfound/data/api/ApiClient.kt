@@ -1,6 +1,5 @@
 package id.taufiq.lostandfound.data.api
 
-import id.taufiq.lostandfound.helper.Constants
 import id.taufiq.lostandfound.helper.Constants.BASE_URL
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

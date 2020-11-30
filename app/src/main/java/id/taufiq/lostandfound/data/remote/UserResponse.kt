@@ -16,7 +16,7 @@ data class UserResponse(
     @Expose
     val role: Int? = null,
 
-    @SerializedName("name")
+    @SerializedName("nama")
     @Expose
     val nama: String? = null,
 
