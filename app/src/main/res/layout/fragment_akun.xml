@@ -31,6 +31,7 @@
 
             <Button
                 android:id="@+id/btn_edit"
+                android:visibility="gone"
                 android:layout_width="18dp"
                 android:layout_height="18dp"
                 android:layout_marginEnd="28dp"
