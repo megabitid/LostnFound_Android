@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import id.taufiq.lostandfound.R
 import id.taufiq.lostandfound.helper.Constants.USER_ID
+import id.taufiq.lostandfound.helper.Constants.USER_IMAGE
 import id.taufiq.lostandfound.helper.Constants.USER_TOKEN
 
 /**
@@ -26,6 +27,22 @@ class SessionManager(context: Context) {
     }
 
     /**
+     * Function to fetch User Image
+     */
+    fun fetchUserImage(): String? {
+        return prefs.getString(USER_IMAGE, null)
+    }
+
+    /**
+     * Function to save User Image
+     */
+    fun saveUserImage(image: String) {
+        val editor = prefs.edit()
+        editor.putString(USER_IMAGE, image)
+        editor.apply()
+    }
+
+    /**
      * Function to fetch auth token
      */
     fun fetchAuthToken(): String? {
@@ -33,7 +50,7 @@ class SessionManager(context: Context) {
     }
 
     /**
-     * Function to save auth token
+     * Function to save User Id
      */
     fun saveUserId(id: Int) {
         val editor = prefs.edit()
@@ -42,18 +59,19 @@ class SessionManager(context: Context) {
     }
 
     /**
-     * Function to fetch auth token
+     * Function to fetch User Id
      */
-    fun fetchUserId(): Int? {
+    fun fetchUserId(): Int {
         return prefs.getInt(USER_ID, 0)
     }
 
     /**
-     * Function to clear logged in token
+     * Function to clear logged in
      */
     fun clearLoggedInToken() {
         val editor: SharedPreferences.Editor = prefs.edit()
         editor.remove(USER_TOKEN)
+        editor.remove(USER_IMAGE)
         editor.remove(USER_ID)
         editor.apply()
     }

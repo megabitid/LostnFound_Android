@@ -46,4 +46,5 @@
     <string name="name">name</string>
     <string name="image">image</string>
     <string name="change">Edit Profile</string>
+    <string name="ganti_foto_profile">Ganti Foto Profile</string>
 </resources>

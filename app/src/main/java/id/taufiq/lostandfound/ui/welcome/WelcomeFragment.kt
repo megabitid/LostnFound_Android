@@ -98,6 +98,7 @@ class WelcomeFragment : Fragment() {
                         if (resource.data?.isSuccessful!!) {
                             val sessionManager = SessionManager(requireActivity())
                             sessionManager.saveAuthToken(resource.data.body()?.token.toString())
+                            sessionManager.saveUserImage(resource.data.body()?.image.toString())
                             resource.data.body()?.id?.let { it1 -> sessionManager.saveUserId(it1) }
                             findNavController().navigate(R.id.action_welcomeFragment_to_homeFragment)
                             Log.d("test : ", resource.data.body().toString())
