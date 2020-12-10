@@ -119,6 +119,7 @@
         <action
             android:id="@+id/action_verifikasiFragment_to_detailHome"
             app:destination="@id/detailHome"
+            app:popUpTo="@id/detailHome"
             app:popUpToInclusive="true" />
     </fragment>
 
