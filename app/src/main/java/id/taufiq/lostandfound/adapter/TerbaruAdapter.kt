@@ -5,8 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import id.taufiq.lostandfound.R
-import id.taufiq.lostandfound.model.local.DataTerbaru
+import id.taufiq.lostandfound.ui.home.bbaru.Data
 import kotlinx.android.synthetic.main.row_item_terbaru.view.*
 
 /**
@@ -16,18 +17,20 @@ import kotlinx.android.synthetic.main.row_item_terbaru.view.*
 
 class TerbaruAdapter(
     val context: Context,
-    private val data: List<DataTerbaru>,
-    private val listener: (DataTerbaru) -> Unit,
+    private val data: List<Data>,
+    private val listener: (Data) -> Unit,
 ) : RecyclerView.Adapter<TerbaruAdapter.TerbaruViewHolder>() {
 
 
     class TerbaruViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun binding(data: DataTerbaru, listener: (DataTerbaru) -> Unit) {
+        fun binding(position: Int, data: Data, listener: (Data) -> Unit) {
             with(itemView) {
-                tv_item.text = data.itemName
+                tv_item.text = data.namaBarang
                 tv_tanggal.text = data.tanggal
-                iv_item.setImageResource(data.imageItem)
-                iv_status.setImageResource(data.status)
+                Glide.with(context).apply {
+                    load(data.barangimages[position].uri).into(iv_item)
+                }
+                // TODO add status
 
                 setOnClickListener { listener(data) }
             }
@@ -42,7 +45,7 @@ class TerbaruAdapter(
     }
 
     override fun onBindViewHolder(holder: TerbaruViewHolder, position: Int) {
-        holder.binding(data[position], listener)
+        holder.binding(position, data[position], listener)
     }
 
     override fun getItemCount(): Int = data.size

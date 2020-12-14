@@ -10,7 +10,6 @@
         android:roundIcon="@drawable/img_logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.home.HomeActivity" />
         <activity
             android:name=".ui.MainActivity"
             android:theme="@style/NoActionBar">

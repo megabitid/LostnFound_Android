@@ -108,8 +108,8 @@
             android:id="@+id/action_detailHome_to_verifikasiFragment"
             app:destination="@id/verifikasiFragment" />
         <argument
-            android:name="TerbaruData"
-            app:argType="id.taufiq.lostandfound.model.local.DataTerbaru" />
+            android:name="id"
+            app:argType="integer" />
     </fragment>
     <fragment
         android:id="@+id/verifikasiFragment"

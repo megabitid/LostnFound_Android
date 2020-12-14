@@ -15,10 +15,11 @@ class BarangTerbaruPresenter(val view: BarangTerbaruView) {
         CoroutineScope(Dispatchers.Main).launch {
             val response = GetBarang.buildApiService().getBarang()
             if (response.isSuccessful) {
-                response.body()?.data?.let { view.getBarangSuccess(it) }
+                // get respond
             } else {
                 view.getBarangFailure(response.message().toString())
             }
         }
     }
+
 }

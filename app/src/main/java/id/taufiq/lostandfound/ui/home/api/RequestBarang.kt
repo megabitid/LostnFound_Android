@@ -1,10 +1,10 @@
 package id.taufiq.lostandfound.ui.home.api
 
-import id.taufiq.lostandfound.helper.Constant
-import id.taufiq.lostandfound.ui.home.data.BarangTerbaru
+import id.taufiq.lostandfound.ui.home.bbaru.ListBarang
+import id.taufiq.lostandfound.ui.home.detailbarang.DetailBarang
 import retrofit2.Response
 import retrofit2.http.GET
-import retrofit2.http.Headers
+import retrofit2.http.Path
 
 /**
  * Created By Taufiq on 12/10/2020.
@@ -12,9 +12,10 @@ import retrofit2.http.Headers
  */
 interface RequestBarang {
     @GET("api/v2/barang")
-    suspend fun getBarang(): Response<BarangTerbaru>
+    suspend fun getBarang(): Response<ListBarang>
 
-//  Get Image
-//    @GET()
-//    suspend fun getImageBarang(): Response<>
+    @GET("api/v2/barang/{id}")
+    suspend fun getDetailBarang(@Path("id") id: Int): Response<DetailBarang>
+
+
 }

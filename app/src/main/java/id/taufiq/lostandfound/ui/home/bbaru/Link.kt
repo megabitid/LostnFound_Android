@@ -1,4 +1,4 @@
-package id.taufiq.lostandfound.ui.home.data
+package id.taufiq.lostandfound.ui.home.bbaru
 
 
 import com.google.gson.annotations.SerializedName

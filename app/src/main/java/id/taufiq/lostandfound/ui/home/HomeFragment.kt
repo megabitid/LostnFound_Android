@@ -1,6 +1,7 @@
 package id.taufiq.lostandfound.ui.home
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,13 +16,14 @@ import id.taufiq.lostandfound.R
 import id.taufiq.lostandfound.adapter.CategoryAdapter
 import id.taufiq.lostandfound.adapter.TerbaruAdapter
 import id.taufiq.lostandfound.model.local.DataCategory
-import id.taufiq.lostandfound.model.local.DataTerbaru
+import id.taufiq.lostandfound.presenter.BarangTerbaruPresenter
+import id.taufiq.lostandfound.presenter.BarangTerbaruView
+import id.taufiq.lostandfound.ui.home.bbaru.Data
 import kotlinx.android.synthetic.main.fragment_home.*
 
-class HomeFragment : Fragment() {
+class HomeFragment : Fragment(), BarangTerbaruView {
     private lateinit var mAuth: FirebaseAuth
     private val data = ArrayList<DataCategory>()
-    private val dataTerbaru = ArrayList<DataTerbaru>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,8 +41,10 @@ class HomeFragment : Fragment() {
 
         listOfData()
         initRecyclerView()
-        dataTerbaru()
-        initListTerbaru()
+
+
+        val presenter = BarangTerbaruPresenter(this)
+        presenter.getBarangTerbaru()
 
 
         // Nav host fragment
@@ -62,16 +66,6 @@ class HomeFragment : Fragment() {
         rv_category.adapter = context?.let {
             CategoryAdapter(it, data) {
 
-            }
-        }
-    }
-
-    private fun initListTerbaru() {
-        rv_terbaru.layoutManager = GridLayoutManager(context, 2)
-        rv_terbaru.adapter = context?.let {
-            TerbaruAdapter(it, dataTerbaru) { terbaru ->
-                val todetail = HomeFragmentDirections.actionHomeFragmentToDetailHome(terbaru)
-                findNavController().navigate(todetail)
             }
         }
     }
@@ -100,40 +94,18 @@ class HomeFragment : Fragment() {
 
     }
 
+    override fun getBarangSuccess(data: List<Data>) {
+        rv_terbaru.layoutManager = GridLayoutManager(context, 2)
+        rv_terbaru.adapter = context?.let {
+            TerbaruAdapter(it, data) { barang ->
+                val todetail = HomeFragmentDirections.actionHomeFragmentToDetailHome(barang.id)
+                findNavController().navigate(todetail)
+            }
+        }
+    }
 
-    private fun dataTerbaru() {
-        dataTerbaru.add(
-            DataTerbaru(
-                R.drawable.tas, "6 November 2020", "Tas Orange", R.drawable.ic_image_hilang,
-                "Barang", "Gucci", "Orange", resources.getString(R.string.lorem_ipsum)
-            )
-        )
-
-
-        dataTerbaru.add(
-            DataTerbaru(
-                R.drawable.hp, "7 November 2020", "Hp Iphone", R.drawable.ic_image_ketemu,
-                "Elektronik", "Iphone", "Hitam", resources.getString(R.string.lorem_ipsum)
-            )
-        )
-
-
-        dataTerbaru.add(
-            DataTerbaru(
-                R.drawable.tas, "6 November 2020", "Tas Orange", R.drawable.ic_image_hilang,
-                "Barang", "Gucci", "Orange", resources.getString(R.string.lorem_ipsum)
-            )
-        )
-
-
-        dataTerbaru.add(
-            DataTerbaru(
-                R.drawable.hp, "7 November 2020", "Hp Iphone", R.drawable.ic_image_ketemu,
-                "Elektronik", "Iphone", "Hitam", resources.getString(R.string.lorem_ipsum)
-            )
-        )
-
-
+    override fun getBarangFailure(message: String) {
+        Log.d("Main Activity", "getBarangFailure: $message")
     }
 
 
