@@ -15,7 +15,7 @@ class BarangTerbaruPresenter(val view: BarangTerbaruView) {
         CoroutineScope(Dispatchers.Main).launch {
             val response = GetBarang.buildApiService().getBarang()
             if (response.isSuccessful) {
-                // get respond
+                view.getBarangSuccess(response.body()!!.data)
             } else {
                 view.getBarangFailure(response.message().toString())
             }

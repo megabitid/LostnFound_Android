@@ -1,6 +1,7 @@
 package id.taufiq.lostandfound
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -8,10 +9,13 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
+import id.taufiq.lostandfound.presenter.DetailPresenter
+import id.taufiq.lostandfound.presenter.DetailView
+import id.taufiq.lostandfound.ui.home.detailbarang.DetailBarang
 import kotlinx.android.synthetic.main.fragment_detail_home.*
 
 
-class DetailHome : Fragment() {
+class DetailHome : Fragment(), DetailView {
 
     private val args by navArgs<DetailHomeArgs>()
 
@@ -27,14 +31,9 @@ class DetailHome : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
 
-        Glide.with(view.context).load(args.TerbaruData.imageItem).into(id_item)
-        tv_nama_item_detail.text = args.TerbaruData.itemName
-        tv_date_item.text = args.TerbaruData.tanggal
-        imageView4.setImageResource(args.TerbaruData.status)
-        textView8.text = args.TerbaruData.kategori
-        textView10.text = args.TerbaruData.merk
-        textView13.text = args.TerbaruData.warna
-        textView15.text = args.TerbaruData.deskripsi
+        val presenter = DetailPresenter(this)
+        presenter.getDetailById(args.id)
+
 
 
         btn_claim.setOnClickListener {
@@ -42,6 +41,26 @@ class DetailHome : Fragment() {
         }
 
 
+    }
+
+    override fun getDataDetailSucces(detailBarang: DetailBarang) {
+        detailBarang.run {
+            tv_nama_item_detail.text = namaBarang
+            tv_date_item.text = tanggal
+            tv_desc.text = deskripsi
+            tv_warna.text = warna
+            tv_merek.text = merek
+            tv_stasiun_loc.text = stasiun.nama
+            tv_category_detail.text = kategori.nama
+
+
+        }
+
+
+    }
+
+    override fun getDataDetailFailed(message: String) {
+        Log.d("Detail Activity", "getDataDetailFailed: $message ")
     }
 
 

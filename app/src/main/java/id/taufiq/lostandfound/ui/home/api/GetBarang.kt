@@ -21,9 +21,8 @@ class GetBarang {
             .addInterceptor(object : Interceptor{
                 override fun intercept(chain: Interceptor.Chain): Response {
                     val request = chain.request().newBuilder()
-                        .addHeader("Authorization", "Bearer " + Constant.authorization)
-                        .build()
-                    return chain.proceed(request)
+                        .header("Authorization", "Bearer " + Constant.authorization)
+                    return chain.proceed(request.build())
                 }
 
             })

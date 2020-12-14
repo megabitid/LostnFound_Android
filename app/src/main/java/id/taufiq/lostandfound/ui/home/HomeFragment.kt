@@ -46,6 +46,8 @@ class HomeFragment : Fragment(), BarangTerbaruView {
         val presenter = BarangTerbaruPresenter(this)
         presenter.getBarangTerbaru()
 
+        rv_terbaru.layoutManager = GridLayoutManager(context, 2)
+
 
         // Nav host fragment
         val host: NavHostFragment = activity?.supportFragmentManager
@@ -95,7 +97,7 @@ class HomeFragment : Fragment(), BarangTerbaruView {
     }
 
     override fun getBarangSuccess(data: List<Data>) {
-        rv_terbaru.layoutManager = GridLayoutManager(context, 2)
+
         rv_terbaru.adapter = context?.let {
             TerbaruAdapter(it, data) { barang ->
                 val todetail = HomeFragmentDirections.actionHomeFragmentToDetailHome(barang.id)

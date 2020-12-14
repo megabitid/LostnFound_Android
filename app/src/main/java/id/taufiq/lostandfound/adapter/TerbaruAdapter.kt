@@ -23,17 +23,17 @@ class TerbaruAdapter(
 
 
     class TerbaruViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun binding(position: Int, data: Data, listener: (Data) -> Unit) {
+        fun binding(data: Data, listener: (Data) -> Unit) {
             with(itemView) {
                 tv_item.text = data.namaBarang
                 tv_tanggal.text = data.tanggal
-                Glide.with(context).apply {
-                    load(data.barangimages[position].uri).into(iv_item)
-                }
-                // TODO add status
+                Glide.with(itemView.context).load(data.barangimages.forEach { it.uri })
+                    .placeholder(R.drawable.tas)
+                    .into(iv_item)
 
                 setOnClickListener { listener(data) }
             }
+            // TODO add status
         }
     }
 
@@ -45,7 +45,7 @@ class TerbaruAdapter(
     }
 
     override fun onBindViewHolder(holder: TerbaruViewHolder, position: Int) {
-        holder.binding(position, data[position], listener)
+        holder.binding(data[position], listener)
     }
 
     override fun getItemCount(): Int = data.size
